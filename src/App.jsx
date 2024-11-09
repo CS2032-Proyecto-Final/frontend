@@ -10,10 +10,10 @@ import Configuracion from './components/Configuracion';
 function App() {
   return (
     <Router>
-      <div className="dashboard">
+      <div>
         <Sidebar />
         <main className="content">
-          <section>
+          <div className="page-content">
             <Routes>
               <Route path="/" element={<Inicio />} />
               <Route path="/buscar-libros" element={<BuscarLibros />} />
@@ -21,7 +21,7 @@ function App() {
               <Route path="/mis-reservas" element={<MisReservas />} />
               <Route path="/configuracion" element={<Configuracion />} />
             </Routes>
-          </section>
+          </div>
         </main>
       </div>
     </Router>
