@@ -19,6 +19,7 @@ function Login() {
       console.log('Inicio de sesión exitoso');
       console.log(localStorage);
       navigate('/');
+      window.location.reload();
     } else {
       setError(result.message || 'Email o contraseña incorrectos');
     }
