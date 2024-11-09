@@ -13,9 +13,6 @@ function App() {
       <div className="dashboard">
         <Sidebar />
         <main className="content">
-          <header>
-            <h1>Dashboard</h1>
-          </header>
           <section>
             <Routes>
               <Route path="/" element={<Inicio />} />
