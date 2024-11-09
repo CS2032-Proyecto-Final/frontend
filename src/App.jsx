@@ -1,3 +1,4 @@
+// src/App.js
 import './App.css';
 import Sidebar from './components/Sidebar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -10,6 +11,12 @@ import Login from './components/Login';
 import Register from './components/Register';
 
 function App() {
+  
+  const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo')) || {};
+  const sidebarColor = tenantInfo.color?.sidebar || '#333'; // Color predeterminado si no está definido
+  const backgroundColor = tenantInfo.color?.background || '#f2f2f2';
+  const contentColor = tenantInfo.color?.content || '#ffffff';
+
   return (
     <Router>
       <Routes>
@@ -18,9 +25,9 @@ function App() {
         <Route
           path="*"
           element={
-            <div>
-              <Sidebar />
-              <main className="content">
+            <div style={{ backgroundColor: backgroundColor, minHeight: '100vh' }}>
+              <Sidebar style={{ backgroundColor: sidebarColor }} />
+              <main className="content" style={{ backgroundColor: contentColor }}>
                 <div className="page-content">
                   <Routes>
                     <Route path="/" element={<Inicio />} />

@@ -1,15 +1,14 @@
 /* src/css/Register.css */
-
 .register-container {
     max-width: 400px;
     width: 100%;
     margin: auto;
     padding: 40px;
-    background-color: var(--background-dark);
-    color: var(--text-light);
+    background-color: #f9f9f9;
+    color: #213547;
     border-radius: 8px;
     text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   }
   
   .register-container h2 {
@@ -18,13 +17,13 @@
   }
   
   .register-container input {
-    max-width: 90%; /* Ajusta el ancho de los campos de entrada */
+    max-width: 90%;
     padding: 12px 25px;
-    margin: 10px auto; /* Centra el campo de entrada */
+    margin: 10px auto;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #333;
-    color: #fff;
+    background-color: #ffffff;
+    color: #213547;
     display: block;
   }
   
@@ -32,7 +31,7 @@
     width: 100%;
     padding: 12px;
     background-color: var(--primary-color);
-    color: #fff;
+    color: #ffffff;
     border: none;
     border-radius: 4px;
     cursor: pointer;

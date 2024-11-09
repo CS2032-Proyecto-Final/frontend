@@ -2,14 +2,14 @@
 
 /* Root variables for theme and typography */
 :root {
-  --primary-color: #646cff;
-  --secondary-color: #535bf2;
-  --background-dark: #242424;
-  --background-light: #ffffff;
-  --text-light: rgba(255, 255, 255, 0.87);
-  --text-dark: #213547;
-  --button-bg-dark: #1a1a1a;
-  --button-bg-light: #f9f9f9;
+  --primary-color: #535bf2;
+  --secondary-color: #646cff;
+  --background-dark: #ffffff;
+  --background-light: #f0f0f5;
+  --text-light: #213547;
+  --text-dark: #242424;
+  --button-bg-dark: #f9f9f9;
+  --button-bg-light: #e0e0e0;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -39,8 +39,8 @@ body {
   align-items: center;
   min-width: 320px;
   min-height: 25vh;
-  background-color: var(--background-dark);
-  color: var(--text-light);
+  background-color: var(--background-light);
+  color: var(--text-dark);
 }
 
 /* Headings */
@@ -57,8 +57,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--button-bg-dark);
-  color: inherit;
+  background-color: var(--button-bg-light);
+  color: var(--text-dark);
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -71,15 +71,15 @@ button:focus-visible {
 }
 
 /* Light mode adjustments */
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    color: var(--text-dark);
-    background-color: var(--background-light);
+    color: var(--text-light);
+    background-color: var(--background-dark);
   }
   a:hover {
-    color: #747bff;
+    color: #b0b7ff;
   }
   button {
-    background-color: var(--button-bg-light);
+    background-color: var(--button-bg-dark);
   }
 }

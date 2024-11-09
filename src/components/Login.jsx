@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './css/Login.css';
+import { fetchLoginData } from '../app/login';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -9,16 +10,17 @@ function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(u => u.email === email && u.password === password);
+  const handleLogin = async () => {
 
-    if (user) {
+    const result = await fetchLoginData(email);
+
+    if (result.success) {
       localStorage.setItem('loggedIn', true);
       console.log('Inicio de sesión exitoso');
+      console.log(localStorage);
       navigate('/');
     } else {
-      setError('Email o contraseña incorrectos');
+      setError(result.message || 'Email o contraseña incorrectos');
     }
   };
 
