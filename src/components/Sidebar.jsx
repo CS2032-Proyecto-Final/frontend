@@ -9,6 +9,7 @@ function Sidebar() {
   const handleLogout = () => {
     localStorage.clear(); // Eliminar el estado de sesión
     navigate('/login'); // Redirigir al login
+    window.location.reload();
   };
 
   return (
