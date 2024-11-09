@@ -1,29 +1,34 @@
-import './App.css'
+import './App.css';
+import Sidebar from './components/Sidebar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Inicio from './components/Inicio';
+import BuscarLibros from './components/BuscarLibros';
+import Ambientes from './components/Ambientes';
+import MisReservas from './components/MisReservas';
+import Configuracion from './components/Configuracion';
 
 function App() {
   return (
-    <div className="dashboard">
-      <nav className="sidebar">
-        <h2>Bibliokuna</h2>
-        <ul>
-          <li>Inicio</li>
-          <li>Buscar Libros</li>
-          <li>Ambientes</li>
-          <li>Mis reservas</li>
-          <li>Configuración</li>
-        </ul>
-      </nav>
-      <main className="content">
-        <header>
-          <h1>Dashboard</h1>
-        </header>
-        <section>
-          <h2>Bienvenido a Bibliokuna</h2>
-          <p>Aquí podrás reservar libros y ambientes de la biblioteca.</p>
-        </section>
-      </main>
-    </div>
-  )
+    <Router>
+      <div className="dashboard">
+        <Sidebar />
+        <main className="content">
+          <header>
+            <h1>Dashboard</h1>
+          </header>
+          <section>
+            <Routes>
+              <Route path="/" element={<Inicio />} />
+              <Route path="/buscar-libros" element={<BuscarLibros />} />
+              <Route path="/ambientes" element={<Ambientes />} />
+              <Route path="/mis-reservas" element={<MisReservas />} />
+              <Route path="/configuracion" element={<Configuracion />} />
+            </Routes>
+          </section>
+        </main>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
