@@ -9,7 +9,9 @@ function BuscarLibros() {
 
   useEffect(() => {
     const loadBooks = async () => {
-      const data = await fetchBooks(page);
+      const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
+      const tenant_id = tenantInfo.tenant_id;
+      const data = await fetchBooks(page, tenant_id);
       setBooks(data);
       setHasMoreBooks(data.length === 5); 
     };
