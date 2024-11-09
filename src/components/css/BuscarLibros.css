@@ -1,0 +1,40 @@
+
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.buscar-libros-container {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.books-list {
+  list-style: none;
+  padding: 0;
+}
+
+.book-item {
+  margin: 15px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.pagination-buttons {
+  margin-top: 20px;
+}
+
+button {
+  margin: 0 5px;
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #606060;
+  cursor: not-allowed;
+}
