@@ -4,8 +4,9 @@
 :root {
   --primary-color: #535bf2;
   --secondary-color: #646cff;
-  --background-dark: #ffffff;
-  --background-light: #f0f0f5;
+  --sidebar-color: #333; /* Valor predeterminado */
+  --background-color: #f2f2f2; /* Valor predeterminado */
+  --content-color: #ffffff; /* Valor predeterminado */
   --text-light: #213547;
   --text-dark: #242424;
   --button-bg-dark: #f9f9f9;
@@ -21,16 +22,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Default link styles */
-a {
-  font-weight: 500;
-  color: var(--primary-color);
-  text-decoration: none;
-}
-a:hover {
-  color: var(--secondary-color);
-}
-
 /* Global reset and body styling */
 body {
   margin: 0;
@@ -39,47 +30,10 @@ body {
   align-items: center;
   min-width: 320px;
   min-height: 25vh;
-  background-color: var(--background-light);
+  background-color: var(--background-color); /* Usar variable CSS */
   color: var(--text-dark);
 }
 
-/* Headings */
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-/* Button styles */
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: var(--button-bg-light);
-  color: var(--text-dark);
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: var(--primary-color);
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-/* Light mode adjustments */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: var(--text-light);
-    background-color: var(--background-dark);
-  }
-  a:hover {
-    color: #b0b7ff;
-  }
-  button {
-    background-color: var(--button-bg-dark);
-  }
 }

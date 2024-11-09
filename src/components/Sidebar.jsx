@@ -7,7 +7,7 @@ function Sidebar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('loggedIn'); // Eliminar el estado de sesión
+    localStorage.clear(); // Eliminar el estado de sesión
     navigate('/login'); // Redirigir al login
   };
 

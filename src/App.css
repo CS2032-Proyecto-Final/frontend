@@ -3,7 +3,7 @@
 /* Sidebar Styles */
 .sidebar {
   width: 200px;
-  background-color: #f0f0f5;
+  background-color: var(--sidebar-color); /* Usar variable CSS */
   color: #213547;
   padding: 20px;
   position: fixed;
@@ -46,7 +46,7 @@
 .page-content {
   max-width: 800px;
   width: 100%;
-  background-color: #f9f9f9;
+  background-color: var(--content-color); /* Usar variable CSS */
   border-radius: 8px;
   padding-top: 25px;
   padding-bottom: 80px;

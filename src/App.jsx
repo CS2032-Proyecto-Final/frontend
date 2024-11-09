@@ -9,13 +9,21 @@ import MisReservas from './components/MisReservas';
 import Configuracion from './components/Configuracion';
 import Login from './components/Login';
 import Register from './components/Register';
+import { useEffect } from 'react';
 
 function App() {
-  
-  const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo')) || {};
-  const sidebarColor = tenantInfo.color?.sidebar || '#333'; // Color predeterminado si no está definido
-  const backgroundColor = tenantInfo.color?.background || '#f2f2f2';
-  const contentColor = tenantInfo.color?.content || '#ffffff';
+  useEffect(() => {
+    // Cargar la configuración de colores desde localStorage
+    const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo')) || {};
+    const sidebarColor = tenantInfo.color?.sidebar || '#333';
+    const backgroundColor = tenantInfo.color?.background || '#f2f2f2';
+    const contentColor = tenantInfo.color?.content || '#ffffff';
+
+    // Aplicar los colores como variables CSS en :root
+    document.documentElement.style.setProperty('--sidebar-color', sidebarColor);
+    document.documentElement.style.setProperty('--background-color', backgroundColor);
+    document.documentElement.style.setProperty('--content-color', contentColor);
+  }, []);
 
   return (
     <Router>
@@ -25,9 +33,9 @@ function App() {
         <Route
           path="*"
           element={
-            <div style={{ backgroundColor: backgroundColor, minHeight: '100vh' }}>
-              <Sidebar style={{ backgroundColor: sidebarColor }} />
-              <main className="content" style={{ backgroundColor: contentColor }}>
+            <div>
+              <Sidebar />
+              <main className="content">
                 <div className="page-content">
                   <Routes>
                     <Route path="/" element={<Inicio />} />
