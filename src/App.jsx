@@ -9,6 +9,7 @@ import MisReservas from './components/MisReservas';
 import Configuracion from './components/Configuracion';
 import Login from './components/Login';
 import Register from './components/Register';
+import AuthLayout from './components/AuthLayout';
 import { TenantProvider } from './context/TenantContex';
 
 function App() {
@@ -16,8 +17,10 @@ function App() {
     <TenantProvider>
       <Router>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route element={<AuthLayout />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
           <Route
             path="*"
             element={

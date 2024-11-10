@@ -26,39 +26,37 @@ function Register() {
   };
 
   return (
-    <div className="auth-wrapper">
-      <div className="auth-container">
-        <h2>Registro</h2>
-        {error && <p className="error-text">{error}</p>}
-        <input
-          type="text"
-          placeholder="Nombre"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Apellido"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button onClick={handleRegister}>Registrar</button>
-        <p>
-          ¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>
-        </p>
-      </div>
+    <div className="auth-container">
+      <h2>Registro</h2>
+      {error && <p className="error-text">{error}</p>}
+      <input
+        type="text"
+        placeholder="Nombre"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Apellido"
+        value={lastname}
+        onChange={(e) => setLastname(e.target.value)}
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Contraseña"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button onClick={handleRegister}>Registrar</button>
+      <p>
+        ¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>
+      </p>
     </div>
   );
 }
