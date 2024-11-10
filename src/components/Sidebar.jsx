@@ -1,15 +1,12 @@
 // src/components/Sidebar.jsx
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './css/Sidebar.css';
 
 function Sidebar() {
-  const navigate = useNavigate();
-
   const handleLogout = () => {
-    localStorage.clear(); // Eliminar el estado de sesión
-    navigate('/login'); // Redirigir al login
-    window.location.reload();
+    localStorage.clear();
+    window.location.href = '/login';
   };
 
   return (
