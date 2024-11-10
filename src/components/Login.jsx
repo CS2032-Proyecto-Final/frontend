@@ -18,8 +18,7 @@ function Login() {
       localStorage.setItem('loggedIn', true);
       console.log('Inicio de sesión exitoso');
       console.log(localStorage);
-      navigate('/');
-      window.location.reload();
+      window.location.href='/';
     } else {
       setError(result.message || 'Email o contraseña incorrectos');
     }
