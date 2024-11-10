@@ -13,7 +13,7 @@ function Login() {
   const { updateTenantInfo } = useTenant();
 
   const handleLogin = async () => {
-    const result = await fetchLoginData(email);
+    const result = await fetchLoginData(email, password);
 
     if (result.success) {
       updateTenantInfo(result.data); // Actualizar tenantInfo en el contexto
