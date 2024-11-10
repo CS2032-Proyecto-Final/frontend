@@ -9,7 +9,7 @@ function Sidebar() {
   const { clearTenantInfo } = useTenant();
 
   const handleLogout = () => {
-    clearTenantInfo(); // Limpiar tenantInfo y localStorage
+    clearTenantInfo();
     navigate('/login');
   };
 
