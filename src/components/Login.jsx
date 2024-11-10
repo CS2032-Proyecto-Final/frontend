@@ -16,7 +16,7 @@ function Login() {
     const result = await fetchLoginData(email, password);
 
     if (result.success) {
-      updateTenantInfo(result.data); // Actualizar tenantInfo en el contexto
+      updateTenantInfo(result.data.tenant_info); // Actualizar tenantInfo en el contexto
       navigate('/');
     } else {
       setError(result.message || 'Email o contraseña incorrectos');

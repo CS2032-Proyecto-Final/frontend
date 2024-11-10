@@ -23,6 +23,7 @@ export async function fetchLoginData(email, password) {
         localStorage.setItem('tenantInfo', JSON.stringify(parsedBody));
         return { success: true, data: parsedBody };
       } else {
+        console.log(data);
         return { success: false, message: 'Error en la respuesta de la API' };
       }
     } catch (error) {
