@@ -1,0 +1,50 @@
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.buscar-libros-container {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.books-list {
+  list-style: none;
+  padding: 0;
+}
+
+.book-item {
+  margin: 15px 0;
+  padding: 10px;
+  border: 1px solid #494949;
+  border-radius: 8px;
+}
+
+.pagination-buttons {
+  margin-top: 20px;
+}
+
+button {
+  background-color: #f0f0f5;
+  color: #213547;
+  border: 1px solid #ccc;
+  margin: 0 5px;
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #e0e0e0;
+  color: #000;
+}
+
+button:disabled {
+  background-color: #dedede;
+  color: #a1a1a1;
+  border-color: #bbb;
+  cursor: not-allowed;
+}

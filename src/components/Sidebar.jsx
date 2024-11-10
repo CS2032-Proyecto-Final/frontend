@@ -1,7 +1,18 @@
+// src/components/Sidebar.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import './css/Sidebar.css';
+import { useTenant } from '../context/TenantContex';
 
 function Sidebar() {
+  const navigate = useNavigate();
+  const { clearTenantInfo } = useTenant();
+
+  const handleLogout = () => {
+    clearTenantInfo(); // Limpiar tenantInfo y localStorage
+    navigate('/login');
+  };
+
   return (
     <nav className="sidebar">
       <h2>Bibliokuna</h2>
@@ -12,6 +23,7 @@ function Sidebar() {
         <li><Link to="/mis-reservas">Mis reservas</Link></li>
         <li><Link to="/configuracion">Configuración</Link></li>
       </ul>
+      <button onClick={handleLogout}>Cerrar sesión</button>
     </nav>
   );
 }
