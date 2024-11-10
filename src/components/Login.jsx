@@ -3,22 +3,21 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './css/Login.css';
 import { fetchLoginData } from '../app/login';
+import { useTenant } from '../context/TenantContex';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { updateTenantInfo } = useTenant();
 
   const handleLogin = async () => {
-
     const result = await fetchLoginData(email);
 
     if (result.success) {
-      localStorage.setItem('loggedIn', true);
-      console.log('Inicio de sesión exitoso');
-      console.log(localStorage);
-      window.location.href='/';
+      updateTenantInfo(result.data); // Actualizar tenantInfo en el contexto
+      navigate('/');
     } else {
       setError(result.message || 'Email o contraseña incorrectos');
     }

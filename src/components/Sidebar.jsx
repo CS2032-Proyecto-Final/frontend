@@ -1,12 +1,16 @@
 // src/components/Sidebar.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './css/Sidebar.css';
+import { useTenant } from '../context/TenantContex';
 
 function Sidebar() {
+  const navigate = useNavigate();
+  const { clearTenantInfo } = useTenant();
+
   const handleLogout = () => {
-    localStorage.clear();
-    window.location.href = '/login';
+    clearTenantInfo(); // Limpiar tenantInfo y localStorage
+    navigate('/login');
   };
 
   return (
