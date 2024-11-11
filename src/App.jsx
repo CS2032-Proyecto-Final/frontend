@@ -2,6 +2,7 @@
 import './App.css';
 import Sidebar from './components/Sidebar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
 import Inicio from './components/Inicio';
 import BuscarLibros from './components/BuscarLibros';
 import Ambientes from './components/Ambientes';
@@ -17,6 +18,7 @@ function App() {
     <TenantProvider>
       <Router>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -29,7 +31,7 @@ function App() {
                 <main className="content">
                   <div className="page-content">
                     <Routes>
-                      <Route path="/" element={<Inicio />} />
+                      <Route path="/inicio" element={<Inicio />} />
                       <Route path="/buscar-libros" element={<BuscarLibros />} />
                       <Route path="/ambientes" element={<Ambientes />} />
                       <Route path="/mis-reservas" element={<MisReservas />} />

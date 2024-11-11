@@ -10,7 +10,7 @@ function Sidebar() {
 
   const handleLogout = () => {
     clearTenantInfo();
-    navigate('/login');
+    navigate('/');
   };
 
   return (

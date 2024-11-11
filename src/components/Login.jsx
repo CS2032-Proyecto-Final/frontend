@@ -1,5 +1,5 @@
 // src/components/Login.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './css/Auth.css';
 import { fetchLoginData } from '../app/login';
@@ -13,12 +13,19 @@ function Login() {
   const navigate = useNavigate();
   const { updateTenantInfo } = useTenant();
 
+  useEffect(() => {
+    const savedTenantId = localStorage.getItem('tenant_id');
+    if (savedTenantId) {
+      setTenant_id(savedTenantId);
+    }
+  }, []);
+
   const handleLogin = async () => {
     const result = await fetchLoginData(tenant_id, email, password);
 
     if (result.success) {
       updateTenantInfo(result.data.tenant_info);
-      navigate('/');
+      navigate('/inicio');
     } else {
       setError(result.message || 'Email o contraseña incorrectos');
     }
@@ -28,12 +35,6 @@ function Login() {
     <div className="auth-container">
       <h2>Iniciar Sesión</h2>
       {error && <p className="error-text">{error}</p>}
-      <input
-        type="tenant_id"
-        placeholder="Nombre de Biblioteca (en minúscula, ej: 'utec')"
-        value={tenant_id}
-        onChange={(e) => setTenant_id(e.target.value)}
-      />
       <input
         type="email"
         placeholder="Email"
@@ -49,6 +50,9 @@ function Login() {
       <button onClick={handleLogin}>Ingresar</button>
       <p>
         ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
+      </p>
+      <p>
+        <Link to="/">Volver al inicio</Link>
       </p>
     </div>
   );
