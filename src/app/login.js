@@ -1,6 +1,6 @@
 // src/app/login.js
 
-export async function fetchLoginData(email, password) {
+export async function fetchLoginData(tenant_id, email, password) {
     try {
       const response = await fetch(
         'https://hapkf0ag12.execute-api.us-east-1.amazonaws.com/dev/auth/login',
@@ -10,7 +10,7 @@ export async function fetchLoginData(email, password) {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            tenant_id: 'utec',
+            tenant_id: tenant_id,
             email: email,
             password: password
           })
