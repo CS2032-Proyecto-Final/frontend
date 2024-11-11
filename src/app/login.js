@@ -19,9 +19,9 @@ export async function fetchLoginData(email, password) {
       const data = await response.json();
   
       if (data.statusCode === 200) {
-        const parsedBody = JSON.parse(data.body);
-        localStorage.setItem('tenantInfo', JSON.stringify(parsedBody));
-        return { success: true, data: parsedBody };
+        console.log("body: ", data.body)
+        localStorage.setItem('userToken', JSON.stringify(data.body.token));
+        return { success: true, data: data.body };
       } else {
         console.log(data);
         return { success: false, message: 'Error en la respuesta de la API' };
