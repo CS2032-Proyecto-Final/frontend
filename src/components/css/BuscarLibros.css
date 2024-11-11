@@ -17,9 +17,24 @@
 
 .book-item {
   margin: 15px 0;
-  padding: 10px;
+  padding: 15px;
   border: 1px solid #494949;
   border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: left;
+}
+
+.book-title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  margin-top: 1px;
+  color: #333;
+}
+
+.book-item p {
+  margin: 5px 0;
+  font-size: 0.9em;
+  color: #555;
 }
 
 .pagination-buttons {

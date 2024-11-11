@@ -38,9 +38,11 @@ function BuscarLibros() {
         <ul className="books-list">
           {books.map((book) => (
             <li key={book.isbn} className="book-item">
-              <strong>{book.title}</strong> by {book.author_name} {book.author_lastname} - {book.pages} pages
-              <br />
-              Stock: {book.stock}, Quantity: {book.quantity}
+              <h4 className="book-title">{book.title}</h4>
+              <p><strong>Autor:</strong> {book.author_name} {book.author_lastname}</p>
+              <p><strong>Páginas:</strong> {book.pages}</p>
+              <p><strong>Cantidad:</strong> {book.quantity}</p>
+              <p><strong>Stock:</strong> {book.stock}</p>
             </li>
           ))}
         </ul>
