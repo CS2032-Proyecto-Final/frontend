@@ -13,7 +13,7 @@ function BuscarLibros() {
       const tenant_id = tenantInfo.tenant_id;
       const data = await fetchBooks(page, tenant_id);
       setBooks(data);
-      setHasMoreBooks(data.length === 5); 
+      setHasMoreBooks(data.length === 6); 
     };
     loadBooks();
   }, [page]);
