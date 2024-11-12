@@ -3,7 +3,7 @@
 // Obtener la lista de bibliotecas (tenants) con sus logos y nombres completos
 export async function fetchLibraries() {
   try {
-    const response = await fetch('https://nbdn1lp357.execute-api.us-east-1.amazonaws.com/dev/libraries/all');
+    const response = await fetch('https://95tbi6q50h.execute-api.us-east-1.amazonaws.com/dev/libraries/all');
     const data = await response.json();
     
     if (data.statusCode !== 200) throw new Error('Error al obtener la lista de bibliotecas');
@@ -19,7 +19,7 @@ export async function fetchLibraries() {
 export async function fetchCustomization(tenantId) {
   try {
     const response = await fetch(
-      `https://nbdn1lp357.execute-api.us-east-1.amazonaws.com/dev/libraries/customization?tenant_id=${tenantId}`
+      `https://95tbi6q50h.execute-api.us-east-1.amazonaws.com/dev/libraries/customization?tenant_id=${tenantId}`
     );
     const data = await response.json();
 

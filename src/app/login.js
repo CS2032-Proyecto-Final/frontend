@@ -3,7 +3,7 @@
 export async function fetchLoginData(tenant_id, email, password) {
     try {
       const response = await fetch(
-        'https://hapkf0ag12.execute-api.us-east-1.amazonaws.com/dev/auth/login',
+        'https://n2tqx1stl1.execute-api.us-east-1.amazonaws.com/dev/auth/login',
         {
           method: 'POST',
           headers: {

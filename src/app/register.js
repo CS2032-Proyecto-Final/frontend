@@ -10,9 +10,11 @@ export const registerUser = async (name, lastname, email, password) => {
       firstname: name,
       lastname,
     };
+
+    console.log(requestBody);
   
     try {
-      const response = await fetch('https://hapkf0ag12.execute-api.us-east-1.amazonaws.com/dev/auth/register', {
+      const response = await fetch('https://n2tqx1stl1.execute-api.us-east-1.amazonaws.com/dev/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
