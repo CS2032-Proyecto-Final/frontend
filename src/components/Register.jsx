@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './css/Auth.css';
+import { registerUser } from '../app/register';
 
 function Register() {
   const [name, setName] = useState('');
@@ -9,19 +10,29 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = () => {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const userExists = users.some((u) => u.email === email);
+  const handleRegister = async () => {
+    setError('');
+    setSuccessMessage('');
 
-    if (userExists) {
-      setError('El email ya está registrado');
+    const tenantId = localStorage.getItem('tenant_id');
+    const eduDomainMatch = email.match(/@([\w-]+)\.edu\.pe$/);
+
+    // Validación del dominio del correo
+    if (eduDomainMatch && eduDomainMatch[1] !== tenantId) {
+      setError('El dominio del correo no coincide con el tenant seleccionado');
+      return;
+    }
+
+    const result = await registerUser(name, lastname, email, password);
+
+    if (result.success) {
+      setSuccessMessage(result.message);
+      setTimeout(() => navigate('/login'), 1000); // Redirigir después de 2 segundos
     } else {
-      const newUser = { name, lastname, email, password };
-      users.push(newUser);
-      localStorage.setItem('users', JSON.stringify(users));
-      navigate('/login');
+      setError(result.message);
     }
   };
 
@@ -29,6 +40,7 @@ function Register() {
     <div className="auth-container">
       <h2>Registro</h2>
       {error && <p className="error-text">{error}</p>}
+      {successMessage && <p className="success-text">{successMessage}</p>}
       <input
         type="text"
         placeholder="Nombre"
