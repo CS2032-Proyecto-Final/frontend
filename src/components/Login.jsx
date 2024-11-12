@@ -24,7 +24,7 @@ function Login() {
     const result = await fetchLoginData(tenant_id, email, password);
 
     if (result.success) {
-      updateTenantInfo(result.data.tenant_info);
+      updateTenantInfo(result.data.tenant_info.body);
       localStorage.setItem('email', email);
       navigate('/inicio');
     } else {

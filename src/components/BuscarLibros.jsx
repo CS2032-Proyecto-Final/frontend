@@ -1,3 +1,5 @@
+// src/components/BuscarLibros.jsx
+
 import React, { useEffect, useState } from 'react';
 import { fetchBooks, toggleFavorite } from '../app/buscarLibros';
 import './css/BuscarLibros.css';
@@ -6,6 +8,7 @@ function BuscarLibros() {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMoreBooks, setHasMoreBooks] = useState(true);
+  const [favoritesLoaded, setFavoritesLoaded] = useState(true); 
   const limit = 6;
 
   useEffect(() => {
@@ -14,8 +17,10 @@ function BuscarLibros() {
       const tenant_id = tenantInfo.tenant_id;
       const email = localStorage.getItem('email');
       const data = await fetchBooks(tenant_id, email, page, limit);
-      setBooks(data);
-      setHasMoreBooks(data.length === limit); 
+      
+      setFavoritesLoaded(data.favorites); // Verificar si los favoritos están disponibles
+      setBooks(data.books);
+      setHasMoreBooks(data.books.length === limit);
     };
     loadBooks();
   }, [page]);
@@ -36,7 +41,7 @@ function BuscarLibros() {
     const tenant_id = localStorage.getItem('tenant_id');
     const email = localStorage.getItem('email');
     const success = await toggleFavorite(tenant_id, email, isbn);
-    
+
     if (success) {
       setBooks((prevBooks) =>
         prevBooks.map((book) =>
@@ -50,6 +55,9 @@ function BuscarLibros() {
     <div className="content-wrapper">
       <div className="buscar-libros-container">
         <h2>Buscar Libros</h2>
+        {!favoritesLoaded && (
+          <p className="error-text">No se pudieron cargar los favoritos.</p>
+        )}
         <p>Encuentra libros disponibles en la biblioteca y revisa sus detalles.</p>
         <ul className="books-list">
           {books.map((book) => (
