@@ -24,42 +24,30 @@
   text-align: left;
 }
 
+.book-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .book-title {
   font-size: 1.2em;
-  margin-bottom: 10px;
-  margin-top: 1px;
+  margin: 0;
   color: #333;
 }
 
-.book-item p {
-  margin: 5px 0;
-  font-size: 0.9em;
-  color: #555;
-}
-
-.pagination-buttons {
-  margin-top: 20px;
-}
-
-button {
-  background-color: #f0f0f5;
-  color: #213547;
-  border: 1px solid #ccc;
-  margin: 0 5px;
-  padding: 8px 12px;
-  font-size: 16px;
+.favorite-button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: transform 0.2s ease;
 }
 
-button:hover:not(:disabled) {
-  background-color: #e0e0e0;
-  color: #000;
+.favorite-button.favorite {
+  color: red;
 }
 
-button:disabled {
-  background-color: #dedede;
-  color: #a1a1a1;
-  border-color: #bbb;
-  cursor: not-allowed;
+.favorite-button:hover {
+  transform: scale(1.2);
 }

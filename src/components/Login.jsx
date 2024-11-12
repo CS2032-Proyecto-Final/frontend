@@ -25,6 +25,7 @@ function Login() {
 
     if (result.success) {
       updateTenantInfo(result.data.tenant_info);
+      localStorage.setItem('email', email);
       navigate('/inicio');
     } else {
       setError(result.message || 'Email o contraseña incorrectos');

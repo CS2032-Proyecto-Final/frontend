@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { fetchBooks } from '../app/buscarLibros';
+import { fetchBooks, toggleFavorite } from '../app/buscarLibros';
 import './css/BuscarLibros.css';
 
 function BuscarLibros() {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMoreBooks, setHasMoreBooks] = useState(true);
+  const limit = 6;
 
   useEffect(() => {
     const loadBooks = async () => {
       const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
       const tenant_id = tenantInfo.tenant_id;
-      const data = await fetchBooks(page, tenant_id);
+      const email = localStorage.getItem('email');
+      const data = await fetchBooks(tenant_id, email, page, limit);
       setBooks(data);
-      setHasMoreBooks(data.length === 6); 
+      setHasMoreBooks(data.length === limit); 
     };
     loadBooks();
   }, [page]);
@@ -30,6 +32,20 @@ function BuscarLibros() {
     }
   };
 
+  const handleToggleFavorite = async (isbn) => {
+    const tenant_id = localStorage.getItem('tenant_id');
+    const email = localStorage.getItem('email');
+    const success = await toggleFavorite(tenant_id, email, isbn);
+    
+    if (success) {
+      setBooks((prevBooks) =>
+        prevBooks.map((book) =>
+          book.isbn === isbn ? { ...book, isFavorite: !book.isFavorite } : book
+        )
+      );
+    }
+  };
+
   return (
     <div className="content-wrapper">
       <div className="buscar-libros-container">
@@ -38,7 +54,15 @@ function BuscarLibros() {
         <ul className="books-list">
           {books.map((book) => (
             <li key={book.isbn} className="book-item">
-              <h4 className="book-title">{book.title}</h4>
+              <div className="book-header">
+                <h4 className="book-title">{book.title}</h4>
+                <button
+                  className={`favorite-button ${book.isFavorite ? 'favorite' : ''}`}
+                  onClick={() => handleToggleFavorite(book.isbn)}
+                >
+                  {book.isFavorite ? '❤️' : '🤍'}
+                </button>
+              </div>
               <p><strong>Autor:</strong> {book.author_name} {book.author_lastname}</p>
               <p><strong>Páginas:</strong> {book.pages}</p>
               <p><strong>Cantidad:</strong> {book.quantity}</p>
