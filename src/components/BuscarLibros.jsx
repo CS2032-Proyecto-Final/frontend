@@ -1,5 +1,3 @@
-// src/components/BuscarLibros.jsx
-
 import React, { useEffect, useState } from 'react';
 import { fetchBooks, toggleFavorite } from '../app/buscarLibros';
 import './css/BuscarLibros.css';
@@ -8,20 +6,24 @@ function BuscarLibros() {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMoreBooks, setHasMoreBooks] = useState(true);
-  const [favoritesLoaded, setFavoritesLoaded] = useState(true); 
+  const [favoritesLoaded, setFavoritesLoaded] = useState(true);
+  const [title, setTitle] = useState('');
+  const [authorName, setAuthorName] = useState('');
+  const [authorLastName, setAuthorLastName] = useState('');
   const limit = 6;
 
+  const loadBooks = async () => {
+    const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
+    const tenant_id = tenantInfo.tenant_id;
+    const email = localStorage.getItem('email');
+    
+    const data = await fetchBooks(tenant_id, email, page, limit, title, authorName, authorLastName);
+    setFavoritesLoaded(data.favorites);
+    setBooks(data.books);
+    setHasMoreBooks(data.books.length === limit);
+  };
+
   useEffect(() => {
-    const loadBooks = async () => {
-      const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
-      const tenant_id = tenantInfo.tenant_id;
-      const email = localStorage.getItem('email');
-      const data = await fetchBooks(tenant_id, email, page, limit);
-      
-      setFavoritesLoaded(data.favorites); // Verificar si los favoritos están disponibles
-      setBooks(data.books);
-      setHasMoreBooks(data.books.length === limit);
-    };
     loadBooks();
   }, [page]);
 
@@ -51,14 +53,40 @@ function BuscarLibros() {
     }
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    loadBooks(); // Recargar libros con filtros aplicados
+  };
+
   return (
     <div className="content-wrapper">
       <div className="buscar-libros-container">
         <h2>Buscar Libros</h2>
-        {!favoritesLoaded && (
-          <p className="error-text">No se pudieron cargar los favoritos.</p>
-        )}
-        <p>Encuentra libros disponibles en la biblioteca y revisa sus detalles.</p>
+        {!favoritesLoaded && <p className="error-text">No se pudieron cargar los favoritos.</p>}
+
+        {/* Formulario de búsqueda */}
+        <form onSubmit={handleSearch} className="search-form">
+          <input
+            type="text"
+            placeholder="Título"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Nombre del Autor"
+            value={authorName}
+            onChange={(e) => setAuthorName(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Apellido del Autor"
+            value={authorLastName}
+            onChange={(e) => setAuthorLastName(e.target.value)}
+          />
+          <button type="submit">Buscar</button>
+        </form>
+
         <ul className="books-list">
           {books.map((book) => (
             <li key={book.isbn} className="book-item">
@@ -78,6 +106,7 @@ function BuscarLibros() {
             </li>
           ))}
         </ul>
+        
         <div className="pagination-buttons">
           <button onClick={handlePreviousPage} disabled={page === 1}>Anterior</button>
           <button onClick={handleNextPage} disabled={!hasMoreBooks}>Siguiente</button>
