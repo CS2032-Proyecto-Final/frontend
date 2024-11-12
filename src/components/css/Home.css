@@ -1,51 +1,88 @@
 /* src/components/css/Home.css */
-.home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .libraries-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
 
-  .home-container h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-    text-align: center;
-    letter-spacing: 1px;
-  }
-  
-  .library-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 150px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  
-  .library-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .library-card img {
-    width: 100px;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .library-card h2 {
-    font-size: 1em;
-    text-align: center;
-  }
-  
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  background-image: url('/images/auth_background.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.welcome-section {
+  display: inline-block; /* Adapta el tamaño al contenido */
+  padding: 20px 40px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6); /* Fondo oscuro con transparencia */
+  border-radius: 12px;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+  margin-right: 40px; /* Espacio entre bienvenida y grid */
+}
+
+.welcome-title {
+  font-size: 3.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.libraries-section {
+  display: inline-block; /* Adapta el tamaño al contenido */
+  padding: 20px 30px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.libraries-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #333;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.libraries-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.library-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.library-card:hover {
+  transform: scale(1.05);
+}
+
+.library-card img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.library-card h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin: 0;
+}
