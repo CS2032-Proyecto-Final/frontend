@@ -1,11 +1,15 @@
 // src/app/buscarLibros.js
 
-export const fetchBooks = async (tenant_id, email, page, limit, title = '', author_name = '', author_lastname = '') => {
+export const fetchBooks = async (tenant_id, email, page, limit, title = '', author_name = '', author_lastname = '', isbn = '') => {
   let url = `https://fenlnd1g0c.execute-api.us-east-1.amazonaws.com/dev/books/search?tenant_id=${tenant_id}&email=${email}&page=${page}&limit=${limit}`;
 
-  if (title) url += `&title=${title}`;
-  if (author_name) url += `&author_name=${author_name}`;
-  if (author_lastname) url += `&author_lastname=${author_lastname}`;
+  if (isbn) {
+    url += `&isbn=${isbn}`;
+  } else {
+    if (title) url += `&title=${title}`;
+    if (author_name) url += `&author_name=${author_name}`;
+    if (author_lastname) url += `&author_lastname=${author_lastname}`;
+  }
 
   try {
     const response = await fetch(url);
@@ -19,6 +23,7 @@ export const fetchBooks = async (tenant_id, email, page, limit, title = '', auth
     return { favorites: false, books: [] };
   }
 };
+
 
 export const toggleFavorite = async (tenant_id, email, isbn) => {
   try {

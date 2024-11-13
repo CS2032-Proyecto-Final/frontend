@@ -10,6 +10,7 @@ function BuscarLibros() {
   const [title, setTitle] = useState('');
   const [authorName, setAuthorName] = useState('');
   const [authorLastName, setAuthorLastName] = useState('');
+  const [isbn, setIsbn] = useState('');
   const limit = 6;
 
   const loadBooks = async () => {
@@ -21,6 +22,17 @@ function BuscarLibros() {
     setFavoritesLoaded(data.favorites);
     setBooks(data.books);
     setHasMoreBooks(data.books.length === limit);
+  };
+
+  const loadBooksByIsbn = async () => {
+    const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
+    const tenant_id = tenantInfo.tenant_id;
+    const email = localStorage.getItem('email');
+    
+    const data = await fetchBooks(tenant_id, email, page, limit, '', '', '', isbn);
+    setFavoritesLoaded(data.favorites);
+    setBooks(data.books);
+    setHasMoreBooks(false);
   };
 
   useEffect(() => {
@@ -55,7 +67,12 @@ function BuscarLibros() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    loadBooks(); // Recargar libros con filtros aplicados
+    loadBooks();
+  };
+
+  const handleIsbnSearch = (e) => {
+    e.preventDefault();
+    loadBooksByIsbn();
   };
 
   return (
@@ -64,27 +81,42 @@ function BuscarLibros() {
         <h2>Buscar Libros</h2>
         {!favoritesLoaded && <p className="error-text">No se pudieron cargar los favoritos.</p>}
 
-        {/* Formulario de búsqueda */}
+        {/* Búsqueda por ISBN */}
+        <form onSubmit={handleIsbnSearch} className="isbn-search">
+          <input
+            type="text"
+            placeholder="ISBN: (ex: 978-0-07-352332-3)"
+            value={isbn}
+            onChange={(e) => setIsbn(e.target.value)}
+            className="search-input"
+          />
+          <button type="submit" className="search-button">Buscar por ISBN</button>
+        </form>
+
+        {/* Formulario de búsqueda por título y autor */}
         <form onSubmit={handleSearch} className="search-form">
           <input
             type="text"
             placeholder="Título"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className="search-input small-input"
           />
           <input
             type="text"
             placeholder="Nombre del Autor"
             value={authorName}
             onChange={(e) => setAuthorName(e.target.value)}
+            className="search-input small-input"
           />
           <input
             type="text"
             placeholder="Apellido del Autor"
             value={authorLastName}
             onChange={(e) => setAuthorLastName(e.target.value)}
+            className="search-input small-input"
           />
-          <button type="submit">Buscar</button>
+          <button type="submit" className="search-button small-button">Buscar</button>
         </form>
 
         <ul className="books-list">
@@ -102,7 +134,7 @@ function BuscarLibros() {
               <p><strong>Autor:</strong> {book.author_name} {book.author_lastname}</p>
               <p><strong>Páginas:</strong> {book.pages}</p>
               <p><strong>Cantidad:</strong> {book.quantity}</p>
-              <p><strong>Stock:</strong> {book.stock}</p>
+              <p><strong>Disponible:</strong> {book.stock}</p>
             </li>
           ))}
         </ul>
