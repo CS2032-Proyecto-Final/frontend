@@ -44,7 +44,7 @@ function Home() {
               className="library-card"
               onClick={() => handleLibraryClick(library.tenant_id)}
             >
-              <img src={library.photo_url} alt={`${library.full_name} logo`} />
+              <img src={library.logo_url} alt={`${library.full_name} logo`} />
               <h2>{library.full_name}</h2>
             </div>
           ))}

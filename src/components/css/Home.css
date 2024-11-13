@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 95.2vh;
   padding: 20px;
   background-image: url('/images/auth_background.png');
   background-size: cover;
@@ -44,7 +44,8 @@
 .libraries-title {
   font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-top: 5px;
+  margin-bottom: 30px;
   color: #333;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 }

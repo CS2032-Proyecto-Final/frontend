@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('/images/auth_background.png'); /* Ruta a la imagen */
+  background-image: url('/images/auth_background.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -15,7 +15,7 @@
   max-width: 400px;
   width: 100%;
   padding: 40px;
-  background-color: rgba(249, 249, 249, 0.94);
+  background-color: rgba(249, 249, 249, 0.9);
   color: #213547;
   border-radius: 8px;
   text-align: center;
