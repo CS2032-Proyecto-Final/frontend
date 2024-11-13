@@ -17,15 +17,6 @@ function Register() {
     setError('');
     setSuccessMessage('');
 
-    const tenantId = localStorage.getItem('tenant_id');
-    const eduDomainMatch = email.match(/@([\w-]+)\.edu\.pe$/);
-
-    // Validación del dominio del correo
-    if (eduDomainMatch && eduDomainMatch[1] !== tenantId) {
-      setError('El dominio del correo no coincide con el tenant seleccionado');
-      return;
-    }
-
     const result = await registerUser(name, lastname, email, password);
 
     if (result.success) {
