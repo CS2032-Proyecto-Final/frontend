@@ -1,90 +1,181 @@
-/* src/components/css/Home.css */
-
-.home-container {
+.content-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 95.2vh;
-  padding: 20px;
-  background-image: url('/images/auth_background.png');
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  padding: 0 10px;
+  max-width: 700px;
 }
 
-.welcome-section {
-  display: inline-block; /* Adapta el tamaño al contenido */
-  padding: 20px 40px;
+.buscar-libros-container {
   text-align: center;
-  background: rgba(0, 0, 0, 0.6); /* Fondo oscuro con transparencia */
-  border-radius: 12px;
-  color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
-  margin-right: 40px; /* Espacio entre bienvenida y grid */
+  margin: 0 auto;
+  max-width: 100%;
 }
 
-.welcome-title {
-  font-size: 3.9rem;
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0;
-  color: #fff;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+.books-list {
+  list-style: none;
+  padding: 0;
 }
 
-.libraries-section {
-  display: inline-block; /* Adapta el tamaño al contenido */
-  padding: 20px 30px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 12px;
-  color: #333;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 800px;
-}
-
-.libraries-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-top: 5px;
-  margin-bottom: 30px;
-  color: #333;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-}
-
-.libraries-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
-}
-
-.library-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 150px;
+.book-item {
+  margin: 15px 0;
   padding: 15px;
-  background-color: #fff;
+  border: 1px solid #494949;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  cursor: pointer;
+  background-color: #f9f9f9;
+  text-align: left;
 }
 
-.library-card:hover {
-  transform: scale(1.05);
+.book-content {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
 }
 
-.library-card img {
-  width: 80px;
-  height: auto;
-  margin-bottom: 10px;
+.book-cover {
+  width: 100px;
+  border-radius: 8px;
 }
 
-.library-card h2 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #333;
-  text-align: center;
+.book-details {
+  flex: 1;
+  overflow: hidden;
+}
+
+.book-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-title {
+  font-size: 1em;
   margin: 0;
+  color: #333;
+  max-width: 250px; /* Limitar ancho del título */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Evitar que el texto se expanda horizontalmente */
+}
+
+.favorite-button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.favorite-button.favorite {
+  color: red;
+}
+
+.favorite-button:hover {
+  transform: scale(1.2);
+}
+
+.description-toggle {
+  background-color: #4a63e7;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.description-toggle:hover {
+  background-color: #3a51d1;
+}
+
+.book-description {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #555;
+  word-wrap: break-word;
+}
+
+/* Estilos para ISBN y búsqueda general */
+.isbn-search, .search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 15px auto;
+  max-width: 700px;
+}
+
+.isbn-search input, .search-form .search-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.isbn-search button, .search-form button {
+  padding: 10px 15px;
+  background-color: #4a63e7;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.isbn-search button:hover, .search-form button:hover {
+  background-color: #3a51d1;
+}
+
+.search-form .small-input {
+  width: 150px;
+}
+
+.search-form .small-button {
+  padding: 10px 12px;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .isbn-search, .search-form {
+    flex-direction: column;
+    max-width: 100%;
+    gap: 12px;
+  }
+
+  .search-form .small-input,
+  .isbn-search input,
+  .isbn-search button,
+  .search-form button {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .buscar-libros-container {
+    padding: 0 10px;
+  }
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.pagination-buttons button {
+  padding: 7px 15px;
+  background-color: #4a63e7;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination-buttons button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-buttons button:hover:not(:disabled) {
+  background-color: #3a51d1;
 }

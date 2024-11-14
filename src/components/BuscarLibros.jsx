@@ -11,6 +11,7 @@ function BuscarLibros() {
   const [authorName, setAuthorName] = useState('');
   const [authorLastName, setAuthorLastName] = useState('');
   const [isbn, setIsbn] = useState('');
+  const [showDescriptions, setShowDescriptions] = useState({}); // Estado para la visibilidad de descripciones
   const limit = 6;
 
   const loadBooks = async () => {
@@ -75,6 +76,13 @@ function BuscarLibros() {
     loadBooksByIsbn();
   };
 
+  const toggleDescription = (isbn) => {
+    setShowDescriptions((prev) => ({
+      ...prev,
+      [isbn]: !prev[isbn],
+    }));
+  };
+
   return (
     <div className="content-wrapper">
       <div className="buscar-libros-container">
@@ -85,7 +93,7 @@ function BuscarLibros() {
         <form onSubmit={handleIsbnSearch} className="isbn-search">
           <input
             type="text"
-            placeholder="ISBN: (ex: 978-0-07-352332-3)"
+            placeholder="ISBN: (ex: 9780073523323)"
             value={isbn}
             onChange={(e) => setIsbn(e.target.value)}
             className="search-input"
@@ -122,19 +130,30 @@ function BuscarLibros() {
         <ul className="books-list">
           {books.map((book) => (
             <li key={book.isbn} className="book-item">
-              <div className="book-header">
-                <h4 className="book-title">{book.title}</h4>
-                <button
-                  className={`favorite-button ${book.isFavorite ? 'favorite' : ''}`}
-                  onClick={() => handleToggleFavorite(book.isbn)}
-                >
-                  {book.isFavorite ? '❤️' : '🤍'}
-                </button>
+              <div className="book-content">
+                <img src={book.cover_url} alt={`${book.title} cover`} className="book-cover" />
+                <div className="book-details">
+                  <div className="book-header">
+                    <h4 className="book-title">{book.title}</h4>
+                    <button
+                      className={`favorite-button ${book.isFavorite ? 'favorite' : ''}`}
+                      onClick={() => handleToggleFavorite(book.isbn)}
+                    >
+                      {book.isFavorite ? '❤️' : '🤍'}
+                    </button>
+                  </div>
+                  <p><strong>Autor:</strong> {book.author_name} {book.author_lastname}</p>
+                  <p><strong>Páginas:</strong> {book.pages}</p>
+                  <p><strong>Cantidad:</strong> {book.quantity}</p>
+                  <p><strong>Disponible:</strong> {book.stock}</p>
+                  <button onClick={() => toggleDescription(book.isbn)} className="description-toggle">
+                    {showDescriptions[book.isbn] ? 'Ocultar descripción' : 'Mostrar descripción'}
+                  </button>
+                  {showDescriptions[book.isbn] && (
+                    <p className="book-description">{book.description}</p>
+                  )}
+                </div>
               </div>
-              <p><strong>Autor:</strong> {book.author_name} {book.author_lastname}</p>
-              <p><strong>Páginas:</strong> {book.pages}</p>
-              <p><strong>Cantidad:</strong> {book.quantity}</p>
-              <p><strong>Disponible:</strong> {book.stock}</p>
             </li>
           ))}
         </ul>

@@ -1,8 +1,9 @@
 .content-wrapper {
   display: flex;
-  justify-content: center;
+
   width: 100%;
   padding: 0 10px;
+  max-width: 600px;
 }
 
 .buscar-libros-container {
@@ -23,6 +24,24 @@
   border-radius: 8px;
   background-color: #f9f9f9;
   text-align: left;
+  width: 100%; /* Asegurar que ocupe todo el ancho */
+  box-sizing: border-box; /* Considerar padding y borde en el ancho total */
+}
+
+.book-content {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.book-cover {
+  width: 100px;
+  border-radius: 8px;
+}
+
+.book-details {
+  flex: 1;
+  overflow: hidden;
 }
 
 .book-header {
@@ -32,9 +51,11 @@
 }
 
 .book-title {
-  font-size: 1.2em;
+  font-size: 1em;
   margin: 0;
   color: #333;
+  max-width: 100%;
+  white-space: inherit;
 }
 
 .favorite-button {
@@ -53,16 +74,34 @@
   transform: scale(1.2);
 }
 
+.description-toggle {
+  background-color: #4a63e7;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.description-toggle:hover {
+  background-color: #3a51d1;
+}
+
+.book-description {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #555;
+  word-wrap: break-word;
+}
+
 /* Estilos para ISBN y búsqueda general */
 .isbn-search, .search-form {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: 15px auto;
   max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .isbn-search input, .search-form .search-input {
@@ -98,7 +137,7 @@
 @media (max-width: 768px) {
   .isbn-search, .search-form {
     flex-direction: column;
-    max-width: 100%; 
+    max-width: 100%;
     gap: 12px;
   }
 
@@ -117,9 +156,9 @@
 
 .pagination-buttons {
   display: flex;
-  justify-content: center; /* Centra los botones */
-  gap: 15px; /* Espacio entre los botones */
-  margin-top: 20px; /* Separación del contenido anterior */
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .pagination-buttons button {
@@ -128,13 +167,12 @@
   color: #fff;
   border: none;
   border-radius: 4px;
-  font-size: 1em;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .pagination-buttons button:disabled {
-  background-color: #ccc; /* Color más claro para el estado deshabilitado */
+  background-color: #ccc;
   cursor: not-allowed;
 }
 
