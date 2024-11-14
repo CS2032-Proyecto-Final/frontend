@@ -1,7 +1,7 @@
 // src/components/Login.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './css/Auth.css';
+import './../css/Auth.css';
 import { fetchLoginData } from '../app/login';
 import { useTenant } from '../context/TenantContex';
 
@@ -20,7 +20,8 @@ function Login() {
     }
   }, []);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Evita el recargado de página
     const result = await fetchLoginData(tenant_id, email, password);
 
     if (result.success) {
@@ -28,7 +29,7 @@ function Login() {
       localStorage.setItem('email', email);
       navigate('/inicio');
     } else {
-      setError(result.message || 'Email o contraseña incorrectos');
+      setError(result.body.error || 'Email o contraseña incorrectos');
     }
   };
 
@@ -36,19 +37,21 @@ function Login() {
     <div className="auth-container">
       <h2>Iniciar Sesión</h2>
       {error && <p className="error-text">{error}</p>}
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Ingresar</button>
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">Ingresar</button>
+      </form>
       <p>
         ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
       </p>

@@ -1,7 +1,7 @@
 // src/components/AuthLayout.jsx
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import './css/Auth.css';
+import './../css/Auth.css';
 
 const AuthLayout = () => {
   const [backgroundImage, setBackgroundImage] = useState('');

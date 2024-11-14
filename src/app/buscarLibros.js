@@ -15,6 +15,7 @@ export const fetchBooks = async (tenant_id, email, page, limit, title = '', auth
     const response = await fetch(url);
     const data = await response.json();
     if (data.statusCode === 200 && data.body) {
+      console.log(data.body);
       return data.body;
     }
     throw new Error('Error fetching books');

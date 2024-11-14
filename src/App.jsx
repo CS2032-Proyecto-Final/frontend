@@ -1,4 +1,4 @@
-// src/App.js
+// src/App.jsx
 import './App.css';
 import Sidebar from './components/Sidebar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -8,6 +8,7 @@ import BuscarLibros from './components/BuscarLibros';
 import Ambientes from './components/Ambientes';
 import MisReservas from './components/MisReservas';
 import Configuracion from './components/Configuracion';
+import MisFavoritos from './components/MisFavoritos'; // Nueva importación
 import Login from './components/Login';
 import Register from './components/Register';
 import AuthLayout from './components/AuthLayout';
@@ -36,6 +37,7 @@ function App() {
                       <Route path="/ambientes" element={<Ambientes />} />
                       <Route path="/mis-reservas" element={<MisReservas />} />
                       <Route path="/configuracion" element={<Configuracion />} />
+                      <Route path="/mis-favoritos" element={<MisFavoritos />} /> {/* Nueva ruta */}
                     </Routes>
                   </div>
                 </main>

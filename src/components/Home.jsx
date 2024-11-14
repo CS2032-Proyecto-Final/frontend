@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchLibraries, fetchCustomization } from '../app/home';
-import './css/Home.css';
+import './../css/Home.css';
 
 function Home() {
   const [libraries, setLibraries] = useState([]);

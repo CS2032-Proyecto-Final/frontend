@@ -24,7 +24,7 @@ export async function fetchLoginData(tenant_id, email, password) {
         return { success: true, data: data.body };
       } else {
         console.log(data);
-        return { success: false, message: 'Error en la respuesta de la API' };
+        return data;
       }
     } catch (error) {
       console.error('Error en la solicitud: ', error);

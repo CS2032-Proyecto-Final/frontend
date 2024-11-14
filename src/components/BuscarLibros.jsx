@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchBooks, toggleFavorite } from '../app/buscarLibros';
-import './css/BuscarLibros.css';
+import './../css/BuscarLibros.css';
 
 function BuscarLibros() {
   const [books, setBooks] = useState([]);
