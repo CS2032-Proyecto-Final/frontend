@@ -1,39 +1,17 @@
 /* index.css */
-
-/* Root variables for theme and typography */
 :root {
   --primary-color: #535bf2;
   --secondary-color: #646cff;
-  --sidebar-color: #333; /* Valor predeterminado */
-  --background-color: #f2f2f2; /* Valor predeterminado */
-  --content-color: #ffffff; /* Valor predeterminado */
+  --sidebar-color: #333;
+  --background-color: #f2f2f2;
+  --content-color: #ffffff;
   --text-light: #213547;
   --text-dark: #242424;
-  --button-bg-dark: #f9f9f9;
-  --button-bg-light: #e0e0e0;
-
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Global reset and body styling */
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 320px;
-  min-height: 25vh;
-  background-color: var(--background-color); /* Usar variable CSS */
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color: var(--text-dark);
-}
-
-button {
-  border-radius: 8px;
+  background-color: var(--background-color);
 }

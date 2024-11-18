@@ -1,0 +1,183 @@
+/* src/css/BuscarLibros.css */
+
+.content-wrapper {
+  display: flex;
+
+  width: 100%;
+  padding: 0 10px;
+  max-width: 600px;
+}
+
+.buscar-libros-container {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.books-list {
+  list-style: none;
+  padding: 0;
+}
+
+.book-item {
+  margin: 15px 0;
+  padding: 15px;
+  border: 1px solid #494949;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: left;
+  width: 100%; /* Asegurar que ocupe todo el ancho */
+  box-sizing: border-box; /* Considerar padding y borde en el ancho total */
+}
+
+.book-content {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.book-cover {
+  width: 100px;
+  border-radius: 8px;
+}
+
+.book-details {
+  flex: 1;
+  overflow: hidden;
+}
+
+.book-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-title {
+  font-size: 1em;
+  margin: 0;
+  color: #333;
+  max-width: 100%;
+  white-space: inherit;
+}
+
+.favorite-button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.favorite-button.favorite {
+  color: red;
+}
+
+.favorite-button:hover {
+  transform: scale(1.2);
+}
+
+.description-toggle {
+  background-color: #4a63e7;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.description-toggle:hover {
+  background-color: #3a51d1;
+}
+
+.book-description {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #555;
+  word-wrap: break-word;
+}
+
+/* Estilos para ISBN y búsqueda general */
+.isbn-search, .search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 15px auto;
+  max-width: 700px;
+}
+
+.isbn-search input, .search-form .search-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.isbn-search button, .search-form button {
+  padding: 10px 15px;
+  background-color: #4a63e7;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.isbn-search button:hover, .search-form button:hover {
+  background-color: #3a51d1;
+}
+
+.search-form .small-input {
+  width: 150px;
+}
+
+.search-form .small-button {
+  padding: 10px 12px;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .isbn-search, .search-form {
+    flex-direction: column;
+    max-width: 100%;
+    gap: 12px;
+  }
+
+  .search-form .small-input,
+  .isbn-search input,
+  .isbn-search button,
+  .search-form button {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .buscar-libros-container {
+    padding: 0 10px;
+  }
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.pagination-buttons button {
+  padding: 7px 15px;
+  background-color: #4a63e7;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination-buttons button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-buttons button:hover:not(:disabled) {
+  background-color: #3a51d1;
+}

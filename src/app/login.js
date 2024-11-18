@@ -1,18 +1,30 @@
 // src/app/login.js
 
-export async function fetchLoginData(email) {
+export async function fetchLoginData(tenant_id, email, password) {
     try {
       const response = await fetch(
-        `https://e0e7mj9gh2.execute-api.us-east-1.amazonaws.com/dev/libraries/info?email=${email}`
+        'https://n2tqx1stl1.execute-api.us-east-1.amazonaws.com/dev/auth/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            tenant_id: tenant_id,
+            email: email,
+            password: password
+          })
+        }
       );
       const data = await response.json();
   
       if (data.statusCode === 200) {
-        const parsedBody = JSON.parse(data.body);
-        localStorage.setItem('tenantInfo', JSON.stringify(parsedBody));
-        return { success: true, data: parsedBody };
+        console.log("user_data: ", data.body)
+        localStorage.setItem('userToken', JSON.stringify(data.body.token));
+        return { success: true, data: data.body };
       } else {
-        return { success: false, message: 'Error en la respuesta de la API' };
+        console.log(data);
+        return data;
       }
     } catch (error) {
       console.error('Error en la solicitud: ', error);
