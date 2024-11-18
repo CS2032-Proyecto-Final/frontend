@@ -44,6 +44,7 @@
 }
 
 .page-content {
+  justify-items: center;
   max-width: 800px;
   width: 100%;
   background-color: var(--content-color); /* Usar variable CSS */

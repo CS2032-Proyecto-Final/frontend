@@ -1,29 +1,35 @@
 // src/components/Sidebar.jsx
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './css/Sidebar.css';
+import { Link } from 'react-router-dom';
 import { useTenant } from '../context/TenantContex';
+import {
+  FaHome,
+  FaSearch,
+  FaMapMarkerAlt,
+  FaCalendarCheck,
+  FaHeart,
+  FaCog
+} from 'react-icons/fa';
+import './../css/Sidebar.css';
 
 function Sidebar() {
-  const navigate = useNavigate();
-  const { clearTenantInfo } = useTenant();
-
-  const handleLogout = () => {
-    clearTenantInfo(); // Limpiar tenantInfo y localStorage
-    navigate('/login');
-  };
+  const { tenantInfo } = useTenant();
+  const logoUrl = tenantInfo?.logo_url || '/default-logo.png'; // Ruta predeterminada si no hay logo
 
   return (
     <nav className="sidebar">
+      <div className="sidebar-logo">
+        <img src={logoUrl} alt="Tenant Logo" className="tenant-logo" />
+      </div>
       <h2>Bibliokuna</h2>
       <ul>
-        <li><Link to="/">Inicio</Link></li>
-        <li><Link to="/buscar-libros">Buscar Libros</Link></li>
-        <li><Link to="/ambientes">Ambientes</Link></li>
-        <li><Link to="/mis-reservas">Mis reservas</Link></li>
-        <li><Link to="/configuracion">Configuración</Link></li>
+        <li><Link to="/inicio"><FaHome /> Inicio</Link></li>
+        <li><Link to="/buscar-libros"><FaSearch /> Buscar Libros</Link></li>
+        <li><Link to="/ambientes"><FaMapMarkerAlt /> Ambientes</Link></li>
+        <li><Link to="/mis-reservas"><FaCalendarCheck /> Mis reservas</Link></li>
+        <li><Link to="/mis-favoritos"><FaHeart /> Mis Favoritos</Link></li>
+        <li><Link to="/configuracion"><FaCog /> Configuración</Link></li>
       </ul>
-      <button onClick={handleLogout}>Cerrar sesión</button>
     </nav>
   );
 }
