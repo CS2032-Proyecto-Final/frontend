@@ -1,4 +1,3 @@
-// src/components/MisFavoritos.jsx
 import React, { useEffect, useState } from 'react';
 import { fetchFavoritesData, toggleFavorite } from '../app/misFavoritos';
 import './../css/BuscarLibros.css';
@@ -23,10 +22,10 @@ function MisFavoritos() {
     const success = await toggleFavorite(tenant_id, email, isbn);
 
     if (success) {
+      // Actualizar la lista de favoritos en tiempo real
       const isCurrentlyFavorite = currentFavorites.some((book) => book.isbn === isbn);
       
       if (isCurrentlyFavorite) {
-        // Si el libro está en favoritos actuales, lo movemos a favoritos pasados
         setCurrentFavorites((prevFavorites) =>
           prevFavorites.filter((book) => book.isbn !== isbn)
         );
@@ -39,7 +38,6 @@ function MisFavoritos() {
           return prevPast;
         });
       } else {
-        // Si el libro está en favoritos pasados, lo movemos a favoritos actuales
         setPastFavorites((prevPast) =>
           prevPast.filter((book) => book.isbn !== isbn)
         );
