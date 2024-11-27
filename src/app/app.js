@@ -6,4 +6,5 @@ export const BASE_URLS = {
   FAVORITES: `https://9vaeq95yoh.execute-api.us-east-1.amazonaws.com/${stage}`,
   LIBRARIES: `https://95tbi6q50h.execute-api.us-east-1.amazonaws.com/${stage}`,
   USERS: `https://n2tqx1stl1.execute-api.us-east-1.amazonaws.com/${stage}`,
+  ENVIRONMENTS: `https://8zm33o5vt7.execute-api.us-east-1.amazonaws.com/${stage}`,
 };

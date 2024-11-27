@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './../css/Ambientes.css'; // Archivo CSS que se menciona abajo
+import { fetchAvailableEnvironments } from '../app/ambientes';
+import './../css/Ambientes.css';
 
 function Ambientes() {
   const [selectedAmbiente, setSelectedAmbiente] = useState(null);
   const [availableAmbientes, setAvailableAmbientes] = useState([]);
+  const [environments, setEnvironments] = useState([]);
 
   // Lista completa de ambientes con sus detalles
   const allAmbientes = [
@@ -13,7 +15,6 @@ function Ambientes() {
   ];
 
   useEffect(() => {
-    // Leer `env_types` del `localStorage` para filtrar los ambientes disponibles
     const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
     const envTypes = tenantInfo.env_types || [];
 
@@ -24,12 +25,24 @@ function Ambientes() {
     setAvailableAmbientes(filteredAmbientes);
   }, []);
 
-  const handleAmbienteClick = (id) => {
+  const handleAmbienteClick = async (id) => {
+    const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
+    const tenant_id = tenantInfo.tenant_id;
+
+    // Cargar los ambientes desde el backend
+    const data = await fetchAvailableEnvironments(tenant_id, id);
+    setEnvironments(data);
     setSelectedAmbiente(id);
   };
 
   const handleBackClick = () => {
     setSelectedAmbiente(null);
+    setEnvironments([]); // Limpiar los ambientes seleccionados
+  };
+
+  const getIconForType = (type) => {
+    const ambiente = allAmbientes.find((amb) => amb.id === type);
+    return ambiente ? ambiente.icon : '❓'; // Default icon if type is unknown
   };
 
   return (
@@ -40,9 +53,23 @@ function Ambientes() {
           <h2>
             {availableAmbientes.find((ambiente) => ambiente.id === selectedAmbiente)?.label}
           </h2>
-          <p>
-            Aquí puedes cargar datos específicos para {selectedAmbiente.replace('_', ' ')}.
-          </p>
+          <div className="environments-container">
+            {environments.length > 0 ? (
+              environments.map((env, index) => (
+                <div key={index} className={`environment-card ${env.status}`}>
+                  <h3>{env.name}</h3>
+                  <div className="icono">{getIconForType(selectedAmbiente)}</div>
+                  <p><strong>Hora:</strong> {env.hour}:00</p>
+                  <p>
+                    <strong>Estado:</strong> {env.status === 'available' ? 'Disponible' : 'No disponible'}
+                  </p>
+                  <p><strong>Capacidad:</strong> {env.capacity}</p>
+                </div>
+              ))
+            ) : (
+              <p>No hay ambientes disponibles en esta categoría.</p>
+            )}
+          </div>
         </div>
       ) : (
         <>

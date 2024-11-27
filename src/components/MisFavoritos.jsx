@@ -22,9 +22,8 @@ function MisFavoritos() {
     const success = await toggleFavorite(tenant_id, email, isbn);
 
     if (success) {
-      // Actualizar la lista de favoritos en tiempo real
       const isCurrentlyFavorite = currentFavorites.some((book) => book.isbn === isbn);
-      
+
       if (isCurrentlyFavorite) {
         setCurrentFavorites((prevFavorites) =>
           prevFavorites.filter((book) => book.isbn !== isbn)
@@ -76,6 +75,7 @@ function MisFavoritos() {
                   <p><strong>Autor:</strong> {book.author_name} {book.author_lastname}</p>
                   <p><strong>Páginas:</strong> {book.pages}</p>
                   <p><strong>Cantidad:</strong> {book.quantity}</p>
+                  <p><strong>Ubicación:</strong> {book.ubicacion || 'No disponible'}</p>
                   <p><strong>Disponible:</strong> {book.stock}</p>
                 </div>
               </div>
@@ -102,6 +102,7 @@ function MisFavoritos() {
                   <p><strong>Autor:</strong> {book.author_name} {book.author_lastname}</p>
                   <p><strong>Páginas:</strong> {book.pages}</p>
                   <p><strong>Cantidad:</strong> {book.quantity}</p>
+                  <p><strong>Ubicación:</strong> {book.ubicacion || 'No disponible'}</p>
                   <p><strong>Disponible:</strong> {book.stock}</p>
                 </div>
               </div>

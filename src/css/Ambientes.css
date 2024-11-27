@@ -14,7 +14,6 @@
     margin-bottom: 50px;
 }
 
-
 .ambientes-container .tarjetas-container {
     display: flex;
     justify-content: center;
@@ -72,4 +71,60 @@
 
 .ambientes-container .volver-btn:hover {
     background-color: #0056b3;
+}
+
+/* Estilos para los detalles de los ambientes */
+.environments-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.environment-card {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 200px;
+    text-align: left;
+    background-color: #f9f9f9;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.environment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.environment-card.available {
+    border-color: green;
+}
+
+.environment-card.unavailable {
+    border-color: red;
+}
+
+.environment-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.environment-card p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.environment-card .capacity {
+    font-weight: bold;
+    color: #000;
+}
+
+.environment-card .icono {
+    font-size: 40px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    text-align: center;
 }
