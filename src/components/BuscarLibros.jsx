@@ -11,14 +11,14 @@ function BuscarLibros() {
   const [authorName, setAuthorName] = useState('');
   const [authorLastName, setAuthorLastName] = useState('');
   const [isbn, setIsbn] = useState('');
-  const [showDescriptions, setShowDescriptions] = useState({}); // Estado para la visibilidad de descripciones
+  const [showDescriptions, setShowDescriptions] = useState({});
   const limit = 6;
 
   const loadBooks = async () => {
     const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
     const tenant_id = tenantInfo.tenant_id;
     const email = localStorage.getItem('email');
-    
+
     const data = await fetchBooks(tenant_id, email, page, limit, title, authorName, authorLastName);
     setFavoritesLoaded(data.favorites);
     setBooks(data.books);
@@ -29,7 +29,7 @@ function BuscarLibros() {
     const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
     const tenant_id = tenantInfo.tenant_id;
     const email = localStorage.getItem('email');
-    
+
     const data = await fetchBooks(tenant_id, email, page, limit, '', '', '', isbn);
     setFavoritesLoaded(data.favorites);
     setBooks(data.books);
@@ -145,6 +145,7 @@ function BuscarLibros() {
                   <p><strong>Autor:</strong> {book.author_name} {book.author_lastname}</p>
                   <p><strong>Páginas:</strong> {book.pages}</p>
                   <p><strong>Cantidad:</strong> {book.quantity}</p>
+                  <p><strong>Ubicación:</strong> {book.ubicacion || 'No disponible'}</p>
                   <p><strong>Disponible:</strong> {book.stock}</p>
                   <button onClick={() => toggleDescription(book.isbn)} className="description-toggle">
                     {showDescriptions[book.isbn] ? 'Ocultar descripción' : 'Mostrar descripción'}
@@ -157,7 +158,7 @@ function BuscarLibros() {
             </li>
           ))}
         </ul>
-        
+
         <div className="pagination-buttons">
           <button onClick={handlePreviousPage} disabled={page === 1}>Anterior</button>
           <button onClick={handleNextPage} disabled={!hasMoreBooks}>Siguiente</button>
