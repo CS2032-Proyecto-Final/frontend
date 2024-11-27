@@ -55,7 +55,7 @@
 
 .ambientes-container .detalle-ambiente {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 .ambientes-container .volver-btn {
@@ -65,7 +65,7 @@
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     transition: background-color 0.2s;
 }
 
@@ -84,7 +84,7 @@
 
 .environment-card {
     padding: 15px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 8px;
     width: 200px;
     text-align: left;
