@@ -1,7 +1,8 @@
 // src/app/buscarLibros.js
+import { BASE_URLS } from './app';
 
 export const fetchBooks = async (tenant_id, email, page, limit, title = '', author_name = '', author_lastname = '', isbn = '') => {
-  let url = `https://fenlnd1g0c.execute-api.us-east-1.amazonaws.com/dev/books/search?tenant_id=${tenant_id}&email=${email}&page=${page}&limit=${limit}`;
+  let url = `${BASE_URLS.BOOKS}/books/search?tenant_id=${tenant_id}&email=${email}&page=${page}&limit=${limit}`;
 
   if (isbn) {
     url += `&isbn=${isbn}`;
@@ -25,10 +26,9 @@ export const fetchBooks = async (tenant_id, email, page, limit, title = '', auth
   }
 };
 
-
 export const toggleFavorite = async (tenant_id, email, isbn) => {
   try {
-    await fetch('https://9vaeq95yoh.execute-api.us-east-1.amazonaws.com/dev/favorite', {
+    await fetch(`${BASE_URLS.FAVORITES}/favorite`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ tenant_id, email, isbn }),

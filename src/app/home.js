@@ -1,13 +1,14 @@
 // src/app/home.js
+import { BASE_URLS } from './app';
 
 // Obtener la lista de bibliotecas (tenants) con sus logos y nombres completos
 export async function fetchLibraries() {
   try {
-    const response = await fetch('https://95tbi6q50h.execute-api.us-east-1.amazonaws.com/dev/libraries/all');
+    const response = await fetch(`${BASE_URLS.LIBRARIES}/libraries/all`);
     const data = await response.json();
     
     if (data.statusCode !== 200) throw new Error('Error al obtener la lista de bibliotecas');
-    return data.body; // Retorna solo la lista de bibliotecas en "body"
+    return data.body;
     
   } catch (error) {
     console.error('Error en fetchLibraries:', error);
@@ -19,7 +20,7 @@ export async function fetchLibraries() {
 export async function fetchCustomization(tenantId) {
   try {
     const response = await fetch(
-      `https://95tbi6q50h.execute-api.us-east-1.amazonaws.com/dev/libraries/customization?tenant_id=${tenantId}`
+      `${BASE_URLS.LIBRARIES}/libraries/customization?tenant_id=${tenantId}`
     );
     const data = await response.json();
 
