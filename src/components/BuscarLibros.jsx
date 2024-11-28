@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchBooks, toggleFavorite } from '../app/buscarLibros';
+import { fetchBooks, toggleFavorite, reserveBook } from '../app/buscarLibros';
 import './../css/BuscarLibros.css';
 
 function BuscarLibros() {
@@ -63,6 +63,18 @@ function BuscarLibros() {
           book.isbn === isbn ? { ...book, isFavorite: !book.isFavorite } : book
         )
       );
+    }
+  };
+
+  const handleReserveBook = async (isbn) => {
+    const tenant_id = localStorage.getItem('tenant_id');
+    const email = localStorage.getItem('email');
+    const result = await reserveBook(tenant_id, email, isbn);
+
+    if (result.success) {
+      console.log(result.message);
+    } else {
+      console.log(`Error: ${result.message}`);
     }
   };
 
@@ -147,9 +159,20 @@ function BuscarLibros() {
                   <p><strong>Cantidad:</strong> {book.quantity}</p>
                   <p><strong>Ubicación:</strong> {book.ubicacion || 'No disponible'}</p>
                   <p><strong>Disponible:</strong> {book.stock}</p>
-                  <button onClick={() => toggleDescription(book.isbn)} className="description-toggle">
-                    {showDescriptions[book.isbn] ? 'Ocultar descripción' : 'Mostrar descripción'}
-                  </button>
+                  <div className="actions">
+                    <button
+                      onClick={() => toggleDescription(book.isbn)}
+                      className="description-toggle"
+                    >
+                      {showDescriptions[book.isbn] ? 'Ocultar descripción' : 'Mostrar descripción'}
+                    </button>
+                    <button
+                      className="reserve-button"
+                      onClick={() => handleReserveBook(book.isbn)}
+                    >
+                      Reservar
+                    </button>
+                  </div>
                   {showDescriptions[book.isbn] && (
                     <p className="book-description">{book.description}</p>
                   )}

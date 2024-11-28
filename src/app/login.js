@@ -22,7 +22,7 @@ export async function fetchLoginData(tenant_id, email, password) {
 
     if (data.statusCode === 200) {
       console.log('user_data: ', data.body);
-      localStorage.setItem('userToken', JSON.stringify(data.body.token));
+      localStorage.setItem('userToken', data.body.token);
       return { success: true, data: data.body };
     } else {
       console.log(data);

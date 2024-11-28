@@ -39,3 +39,27 @@ export const toggleFavorite = async (tenant_id, email, isbn) => {
     return false;
   }
 };
+
+export const reserveBook = async (tenant_id, email, isbn) => {
+  const token = localStorage.getItem('userToken');
+  try {
+    const response = await fetch(`${BASE_URLS.RESERVATIONS}/reservation/book`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: { tenant_id, email, isbn },
+    });
+    const data = await response.json();
+    if (response.ok) {
+      console.log(response)
+      return { success: true, message: data.message || 'Libro reservado exitosamente' };
+    } else {
+      throw new Error(data.message || 'Error al reservar el libro');
+    }
+  } catch (error) {
+    console.error('Error al reservar el libro:', error);
+    return { success: false, message: error.message || 'Error en la solicitud' };
+  }
+};
