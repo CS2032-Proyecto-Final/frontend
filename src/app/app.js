@@ -2,9 +2,9 @@
 const stage = 'dev';
 
 export const BASE_URLS = {
-  BOOKS: `https://chw4y7jpdl.execute-api.us-east-1.amazonaws.com/${stage}`,
-  FAVORITES: `https://9vaeq95yoh.execute-api.us-east-1.amazonaws.com/${stage}`,
+  BOOKS: `https://5hwmwqefva.execute-api.us-east-1.amazonaws.com/${stage}`,
+  FAVORITES: `https://8xpkki1r6a.execute-api.us-east-1.amazonaws.com/${stage}`,
   LIBRARIES: `https://95tbi6q50h.execute-api.us-east-1.amazonaws.com/${stage}`,
-  USERS: `https://n2tqx1stl1.execute-api.us-east-1.amazonaws.com/${stage}`,
-  ENVIRONMENTS: `https://8zm33o5vt7.execute-api.us-east-1.amazonaws.com/${stage}`,
+  USERS: `https://yqyomo3gcf.execute-api.us-east-1.amazonaws.com/${stage}`,
+  ENVIRONMENTS: `https://txiblm2q60.execute-api.us-east-1.amazonaws.com/${stage}`,
 };
