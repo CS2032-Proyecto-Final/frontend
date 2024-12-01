@@ -3,6 +3,7 @@ import { BASE_URLS } from './app';
 
 export const fetchBooks = async (tenant_id, email, page, limit, title = '', author_name = '', author_lastname = '', isbn = '') => {
   let url = `${BASE_URLS.BOOKS}/books/search?tenant_id=${tenant_id}&email=${email}&page=${page}&limit=${limit}`;
+  const token = localStorage.getItem('userToken');
 
   if (isbn) {
     url += `&isbn=${isbn}`;
@@ -13,7 +14,13 @@ export const fetchBooks = async (tenant_id, email, page, limit, title = '', auth
   }
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': token,
+        'Content-Type': 'application/json'
+      }
+    });
     const data = await response.json();
     if (data.statusCode === 200 && data.body) {
       console.log(data.body);
@@ -46,14 +53,14 @@ export const reserveBook = async (tenant_id, email, isbn) => {
     const response = await fetch(`${BASE_URLS.RESERVATIONS}/reservation/book`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        'Authorization': token,
+        'Content-Type': 'application/json'
       },
       body: { tenant_id, email, isbn },
     });
     const data = await response.json();
     if (response.ok) {
-      console.log(response)
+      console.log(data);
       return { success: true, message: data.message || 'Libro reservado exitosamente' };
     } else {
       throw new Error(data.message || 'Error al reservar el libro');
