@@ -1,0 +1,82 @@
+.inicio-container {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    color: #000; /* Letras negras */
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .inicio-box {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    text-align: left;
+  }
+  
+  .inicio-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .inicio-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .inicio-box li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+  
+  .inicio-box p {
+    font-size: 1rem;
+    margin: 5px 0;
+  }
+  
+  strong {
+    font-weight: bold;
+  }
+  
+  .services-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 8px;
+    width: 150px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .service-name {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
