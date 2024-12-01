@@ -2,28 +2,28 @@
     font-family: Arial, sans-serif;
     padding: 20px;
     text-align: center;
-}
-
-.ambientes-container h2 {
+  }
+  
+  .ambientes-container h2 {
     color: #333;
     margin-bottom: 10px;
-}
-
-.ambientes-container p {
+  }
+  
+  .ambientes-container p {
     color: #333;
     margin-bottom: 50px;
-}
-
-.ambientes-container .tarjetas-container {
+  }
+  
+  .tarjetas-container {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
     flex-wrap: wrap;
     margin-top: 20px;
-}
-
-.ambientes-container .tarjeta {
+  }
+  
+  .tarjeta {
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -35,96 +35,82 @@
     justify-content: center;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.ambientes-container .tarjeta:hover {
+  }
+  
+  .tarjeta:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.ambientes-container .icono {
+  }
+  
+  .icono {
     font-size: 50px;
     margin-bottom: 15px;
-}
-
-.ambientes-container .label {
+  }
+  
+  .label {
     font-size: 18px;
     font-weight: bold;
     color: #333;
-}
-
-.ambientes-container .detalle-ambiente {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.ambientes-container .volver-btn {
+  }
+  
+  .detalle-ambiente {
+    margin-top: 30px;
+  }
+  
+  .ambiente-detail {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .ambiente-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .time-slot-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+  }
+  
+  .time-slot {
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .time-slot.selected {
     background-color: #007bff;
     color: #fff;
+  }
+  
+  .time-slot:hover:not(:disabled) {
+    background-color: #0056b3;
+    color: #fff;
+  }
+  
+  .volver-btn {
+    background-color: #007bff;
+    color: white;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
-    margin-bottom: 10px;
-    transition: background-color 0.2s;
-}
-
-.ambientes-container .volver-btn:hover {
+    margin-bottom: 20px;
+  }
+  
+  .volver-btn:hover {
     background-color: #0056b3;
-}
-
-/* Estilos para los detalles de los ambientes */
-.environments-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.environment-card {
-    padding: 15px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    width: 200px;
-    text-align: left;
-    background-color: #f9f9f9;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.environment-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.environment-card.available {
-    border-color: green;
-}
-
-.environment-card.unavailable {
-    border-color: red;
-}
-
-.environment-card h3 {
-    margin: 0;
-    font-size: 1.2rem;
-    color: #333;
-}
-
-.environment-card p {
-    margin: 5px 0;
-    font-size: 0.9rem;
-    color: #555;
-}
-
-.environment-card .capacity {
-    font-weight: bold;
-    color: #000;
-}
-
-.environment-card .icono {
-    font-size: 40px;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    text-align: center;
-}
+  }
+  

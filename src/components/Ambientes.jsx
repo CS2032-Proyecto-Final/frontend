@@ -7,7 +7,6 @@ function Ambientes() {
   const [availableAmbientes, setAvailableAmbientes] = useState([]);
   const [environments, setEnvironments] = useState([]);
 
-  // Lista completa de ambientes con sus detalles
   const allAmbientes = [
     { id: 'computadoras', label: 'Computadoras', icon: '💻' },
     { id: 'salas_de_estudio', label: 'Salas de Estudio', icon: '📖' },
@@ -17,8 +16,6 @@ function Ambientes() {
   useEffect(() => {
     const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
     const envTypes = tenantInfo.env_types || [];
-
-    // Filtrar los ambientes basados en `env_types`
     const filteredAmbientes = allAmbientes.filter((ambiente) =>
       envTypes.includes(ambiente.id)
     );
@@ -31,39 +28,59 @@ function Ambientes() {
 
     // Cargar los ambientes desde el backend
     const data = await fetchAvailableEnvironments(tenant_id, id);
-    setEnvironments(data);
+
+    // Agrupar los ambientes por nombre
+    const grouped = data.reduce((acc, env) => {
+      const existing = acc.find((item) => item.name === env.name);
+      if (existing) {
+        existing.hours.push(env.hour);
+      } else {
+        acc.push({ ...env, hours: [env.hour] });
+      }
+      return acc;
+    }, []);
+
+    setEnvironments(grouped);
     setSelectedAmbiente(id);
   };
 
   const handleBackClick = () => {
     setSelectedAmbiente(null);
-    setEnvironments([]); // Limpiar los ambientes seleccionados
+    setEnvironments([]);
   };
 
   const getIconForType = (type) => {
     const ambiente = allAmbientes.find((amb) => amb.id === type);
-    return ambiente ? ambiente.icon : '❓'; // Default icon if type is unknown
+    return ambiente ? ambiente.icon : '❓'; // Icono por defecto si no coincide
   };
 
   return (
     <div className="ambientes-container">
       {selectedAmbiente ? (
         <div className="detalle-ambiente">
-          <button className="volver-btn" onClick={handleBackClick}>Volver</button>
+          <button className="volver-btn" onClick={handleBackClick}>
+            Volver
+          </button>
           <h2>
-            {availableAmbientes.find((ambiente) => ambiente.id === selectedAmbiente)?.label}
+            {availableAmbientes.find((amb) => amb.id === selectedAmbiente)?.label}
           </h2>
-          <div className="environments-container">
+          <div className="ambiente-detail">
             {environments.length > 0 ? (
               environments.map((env, index) => (
-                <div key={index} className={`environment-card ${env.status}`}>
+                <div key={index} className="ambiente-card">
                   <h3>{env.name}</h3>
                   <div className="icono">{getIconForType(selectedAmbiente)}</div>
-                  <p><strong>Hora:</strong> {env.hour}:00</p>
+                  <p>Horarios disponibles:</p>
+                  <div className="time-slot-container">
+                    {env.hours.map((hour, i) => (
+                      <button key={i} className="time-slot">
+                        {hour < 10 ? `0${hour}:00` : `${hour}:00`}
+                      </button>
+                    ))}
+                  </div>
                   <p>
-                    <strong>Estado:</strong> {env.status === 'available' ? 'Disponible' : 'No disponible'}
+                    <strong>Capacidad:</strong> {env.capacity} personas
                   </p>
-                  <p><strong>Capacidad:</strong> {env.capacity}</p>
                 </div>
               ))
             ) : (
