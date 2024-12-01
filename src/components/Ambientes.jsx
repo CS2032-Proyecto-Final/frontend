@@ -24,10 +24,9 @@ function Ambientes() {
 
   const handleAmbienteClick = async (id) => {
     const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
-    const tenant_id = tenantInfo.tenant_id;
 
     // Cargar los ambientes desde el backend
-    const data = await fetchAvailableEnvironments(tenant_id, id);
+    const data = await fetchAvailableEnvironments(id);
 
     // Agrupar los ambientes por nombre
     const grouped = data.reduce((acc, env) => {

@@ -1,10 +1,15 @@
 // src/app/ambientes.js
 import { BASE_URLS } from './app';
 
-export async function fetchAvailableEnvironments(tenant_id, type) {
+export async function fetchAvailableEnvironments(type) {
   try {
+    const token = localStorage.getItem('userToken');
     const response = await fetch(
-      `${BASE_URLS.ENVIRONMENTS}/environment/list?tenant_id=${tenant_id}&type=${type}`
+      `${BASE_URLS.ENVIRONMENTS}/environment/list?type=${type}`, {
+        headers: {
+          'Authorization': token
+        }
+      }
     );
     const data = await response.json();
 

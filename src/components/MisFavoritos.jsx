@@ -19,7 +19,7 @@ function MisFavoritos() {
   const handleToggleFavorite = async (isbn) => {
     const tenant_id = localStorage.getItem('tenant_id');
     const email = localStorage.getItem('email');
-    const success = await toggleFavorite(tenant_id, email, isbn);
+    const success = await toggleFavorite(isbn);
 
     if (success) {
       const isCurrentlyFavorite = currentFavorites.some((book) => book.isbn === isbn);

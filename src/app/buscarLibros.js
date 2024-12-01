@@ -1,8 +1,8 @@
 // src/app/buscarLibros.js
 import { BASE_URLS } from './app';
 
-export const fetchBooks = async (tenant_id, email, page, limit, title = '', author_name = '', author_lastname = '', isbn = '') => {
-  let url = `${BASE_URLS.BOOKS}/books/search?tenant_id=${tenant_id}&email=${email}&page=${page}&limit=${limit}`;
+export const fetchBooks = async (page, limit, title = '', author_name = '', author_lastname = '', isbn = '') => {
+  let url = `${BASE_URLS.BOOKS}/books/search?page=${page}&limit=${limit}`;
   const token = localStorage.getItem('userToken');
 
   if (isbn) {
@@ -33,12 +33,13 @@ export const fetchBooks = async (tenant_id, email, page, limit, title = '', auth
   }
 };
 
-export const toggleFavorite = async (tenant_id, email, isbn) => {
+export const toggleFavorite = async (isbn) => {
   try {
+    const token = localStorage.getItem('userToken');
     await fetch(`${BASE_URLS.FAVORITES}/favorite`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tenant_id, email, isbn }),
+      headers: { 'Content-Type': 'application/json', 'Authorization': token },
+      body: JSON.stringify({ isbn }),
     });
     return true;
   } catch (error) {
@@ -47,7 +48,7 @@ export const toggleFavorite = async (tenant_id, email, isbn) => {
   }
 };
 
-export const reserveBook = async (tenant_id, email, isbn) => {
+export const reserveBook = async (isbn) => {
   const token = localStorage.getItem('userToken');
   try {
     const response = await fetch(`${BASE_URLS.RESERVATIONS}/reservation/book`, {
@@ -56,7 +57,7 @@ export const reserveBook = async (tenant_id, email, isbn) => {
         'Authorization': token,
         'Content-Type': 'application/json'
       },
-      body: { tenant_id, email, isbn },
+      body: { isbn },
     });
     const data = await response.json();
     if (response.ok) {

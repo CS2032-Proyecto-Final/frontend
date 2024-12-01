@@ -2,14 +2,17 @@ import { BASE_URLS } from './app';
 import { toggleFavorite as toggleFavoriteAPI } from './buscarLibros';
 
 export async function fetchFavoritesData() {
-  const tenant_id = localStorage.getItem('tenant_id');
-  const email = localStorage.getItem('email');
+  const token = localStorage.getItem('userToken');
   
   // URL para obtener los favoritos
-  const favoritesApiUrl = `${BASE_URLS.FAVORITES}/favorite/my/all?tenant_id=${tenant_id}&email=${email}`;
+  const favoritesApiUrl = `${BASE_URLS.FAVORITES}/favorite/my/all`;
   
   try {
-    const favoritesResponse = await fetch(favoritesApiUrl);
+    const favoritesResponse = await fetch(favoritesApiUrl, {
+      headers: {
+        'Authorization': token
+      }
+    });
     const favoritesData = await favoritesResponse.json();
 
     const currentIsbns = [];
@@ -25,8 +28,12 @@ export async function fetchFavoritesData() {
     }
 
     // URL para obtener los detalles de los libros
-    const booksApiUrl = `${BASE_URLS.BOOKS}/books/details?tenant_id=${tenant_id}&isbns=${JSON.stringify([...currentIsbns, ...pastIsbns])}`;
-    const booksResponse = await fetch(booksApiUrl);
+    const booksApiUrl = `${BASE_URLS.BOOKS}/books/details?isbns=${JSON.stringify([...currentIsbns, ...pastIsbns])}`;
+    const booksResponse = await fetch(booksApiUrl, {
+      headers: {
+        'Authorization': token
+      }
+    });
     const booksData = await booksResponse.json();
 
     // Asegurarse de obtener el array de libros desde `booksData.body`
@@ -48,6 +55,6 @@ export async function fetchFavoritesData() {
   }
 }
 
-export async function toggleFavorite(tenant_id, email, isbn) {
-  return await toggleFavoriteAPI(tenant_id, email, isbn);
+export async function toggleFavorite(isbn) {
+  return await toggleFavoriteAPI(isbn);
 }

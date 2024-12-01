@@ -19,7 +19,7 @@ function BuscarLibros() {
     const tenant_id = tenantInfo.tenant_id;
     const email = localStorage.getItem('email');
 
-    const data = await fetchBooks(tenant_id, email, page, limit, title, authorName, authorLastName);
+    const data = await fetchBooks(page, limit, title, authorName, authorLastName);
     setFavoritesLoaded(data.favorites);
     setBooks(data.books);
     setHasMoreBooks(data.books.length === limit);
@@ -30,7 +30,7 @@ function BuscarLibros() {
     const tenant_id = tenantInfo.tenant_id;
     const email = localStorage.getItem('email');
 
-    const data = await fetchBooks(tenant_id, email, page, limit, '', '', '', isbn);
+    const data = await fetchBooks(page, limit, '', '', '', isbn);
     setFavoritesLoaded(data.favorites);
     setBooks(data.books);
     setHasMoreBooks(false);
@@ -55,7 +55,7 @@ function BuscarLibros() {
   const handleToggleFavorite = async (isbn) => {
     const tenant_id = localStorage.getItem('tenant_id');
     const email = localStorage.getItem('email');
-    const success = await toggleFavorite(tenant_id, email, isbn);
+    const success = await toggleFavorite(isbn);
 
     if (success) {
       setBooks((prevBooks) =>
@@ -69,7 +69,7 @@ function BuscarLibros() {
   const handleReserveBook = async (isbn) => {
     const tenant_id = localStorage.getItem('tenant_id');
     const email = localStorage.getItem('email');
-    const result = await reserveBook(tenant_id, email, isbn);
+    const result = await reserveBook(isbn);
 
     if (result.success) {
       console.log(result.message);
