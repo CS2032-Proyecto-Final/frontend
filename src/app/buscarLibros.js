@@ -57,7 +57,7 @@ export const reserveBook = async (isbn) => {
         'Authorization': token,
         'Content-Type': 'application/json'
       },
-      body: { isbn },
+      body: JSON.stringify({ isbn }),
     });
     const data = await response.json();
     if (response.ok) {
