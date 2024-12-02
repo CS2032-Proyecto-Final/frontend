@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { fetchAvailableEnvironments } from '../app/ambientes';
-import { reserveEnvironment } from '../app/ambientes'; // Importar el nuevo método
+import { fetchAvailableEnvironments, reserveEnvironment } from '../app/ambientes';
+import Toast from './Toast';
 import './../css/Ambientes.css';
 
 function Ambientes() {
   const [selectedAmbiente, setSelectedAmbiente] = useState(null);
   const [availableAmbientes, setAvailableAmbientes] = useState([]);
   const [environments, setEnvironments] = useState([]);
-  const [reservationMessage, setReservationMessage] = useState(''); // Para mostrar el resultado de la reserva
+  const [toastMessage, setToastMessage] = useState(''); // Para mostrar el mensaje del Toast
 
   const allAmbientes = [
     { id: 'computadoras', label: 'Computadoras', icon: '💻' },
@@ -43,8 +43,29 @@ function Ambientes() {
 
   const handleReserveClick = async (type, name, hour) => {
     const result = await reserveEnvironment(type, name, hour);
-    setReservationMessage(result.message); // Mostrar el mensaje
-    setTimeout(() => setReservationMessage(''), 3000); // Limpiar el mensaje después de 3 segundos
+    if (result.success) {
+      setToastMessage(result.message);
+
+      // Actualizar dinámicamente el estado de "environments"
+      setEnvironments((prevEnvironments) =>
+        prevEnvironments.map((env) =>
+          env.name === name
+            ? {
+                ...env,
+                hours: env.hours.map((slot) =>
+                  slot.hour === hour ? { ...slot, status: 'unavailable' } : slot
+                ),
+              }
+            : env
+        )
+      );
+    } else {
+      setToastMessage('Error al reservar el ambiente.');
+    }
+  };
+
+  const handleCloseToast = () => {
+    setToastMessage('');
   };
 
   const handleBackClick = () => {
@@ -54,6 +75,7 @@ function Ambientes() {
 
   return (
     <div className="ambientes-container">
+      {toastMessage && <Toast message={toastMessage} onClose={handleCloseToast} />}
       {selectedAmbiente ? (
         <div className="detalle-ambiente">
           <button className="volver-btn" onClick={handleBackClick}>
@@ -62,7 +84,6 @@ function Ambientes() {
           <h2>
             {availableAmbientes.find((amb) => amb.id === selectedAmbiente)?.label}
           </h2>
-          {reservationMessage && <p className="reservation-message">{reservationMessage}</p>}
           <div className="ambiente-detail">
             {environments.length > 0 ? (
               environments.map((env, index) => (

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchBooks, toggleFavorite, reserveBook } from '../app/buscarLibros';
+import Toast from './Toast'; // Importar el Toast
 import './../css/BuscarLibros.css';
 
 function BuscarLibros() {
@@ -12,6 +13,7 @@ function BuscarLibros() {
   const [authorLastName, setAuthorLastName] = useState('');
   const [isbn, setIsbn] = useState('');
   const [showDescriptions, setShowDescriptions] = useState({});
+  const [toastMessage, setToastMessage] = useState(''); 
   const limit = 6;
 
   const loadBooks = async () => {
@@ -60,10 +62,19 @@ function BuscarLibros() {
     const result = await reserveBook(isbn);
 
     if (result.success) {
-      console.log(result.message);
+      setToastMessage(result.message); // Mostrar el Toast con el mensaje
+      setBooks((prevBooks) =>
+        prevBooks.map((book) =>
+          book.isbn === isbn ? { ...book, stock: book.stock - 1 } : book
+        )
+      );
     } else {
-      console.log(`Error: ${result.message}`);
+      setToastMessage(`Error: ${result.message}`);
     }
+  };
+
+  const handleCloseToast = () => {
+    setToastMessage('');
   };
 
   const handleSearch = (e) => {
@@ -85,6 +96,7 @@ function BuscarLibros() {
 
   return (
     <div className="content-wrapper">
+      {toastMessage && <Toast message={toastMessage} onClose={handleCloseToast} />}
       <div className="buscar-libros-container">
         <h2>Buscar Libros</h2>
         {!favoritesLoaded && <p className="error-text">No se pudieron cargar los favoritos.</p>}
