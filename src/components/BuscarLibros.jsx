@@ -58,14 +58,19 @@ function BuscarLibros() {
     }
   };
 
-  const handleReserveBook = async (isbn) => {
+  const handleReserveBook = async (isbn, availableQuantity) => {
+    if (availableQuantity <= 0) {
+      setToastMessage('Error: Este libro no está disponible para reservar.');
+      return;
+    }
+
     const result = await reserveBook(isbn);
 
     if (result.success) {
       setToastMessage(result.message); // Mostrar el Toast con el mensaje
       setBooks((prevBooks) =>
         prevBooks.map((book) =>
-          book.isbn === isbn ? { ...book, stock: book.stock - 1 } : book
+          book.isbn === isbn ? { ...book, quantity: book.quantity - 1 } : book
         )
       );
     } else {
@@ -156,9 +161,9 @@ function BuscarLibros() {
                   </div>
                   <p><strong>Autor:</strong> {book.author_name} {book.author_lastname}</p>
                   <p><strong>Páginas:</strong> {book.pages}</p>
-                  <p><strong>Cantidad:</strong> {book.quantity}</p>
+                  <p><strong>Cantidad:</strong> {book.stock}</p>
                   <p><strong>Ubicación:</strong> {book.ubicacion || 'No disponible'}</p>
-                  <p><strong>Disponible:</strong> {book.stock}</p>
+                  <p><strong>Disponible:</strong> {book.quantity}</p>
                   <div className="actions">
                     <button
                       onClick={() => toggleDescription(book.isbn)}
@@ -167,8 +172,9 @@ function BuscarLibros() {
                       {showDescriptions[book.isbn] ? 'Ocultar descripción' : 'Mostrar descripción'}
                     </button>
                     <button
-                      className="reserve-button"
-                      onClick={() => handleReserveBook(book.isbn)}
+                      className={`reserve-button ${book.quantity <= 0 ? 'disabled' : ''}`}
+                      onClick={() => handleReserveBook(book.isbn, book.quantity)}
+                      disabled={book.quantity <= 0}
                     >
                       Reservar
                     </button>
