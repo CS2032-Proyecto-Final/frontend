@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { fetchAvailableEnvironments } from '../app/ambientes';
+import { reserveEnvironment } from '../app/ambientes'; // Importar el nuevo método
 import './../css/Ambientes.css';
 
 function Ambientes() {
   const [selectedAmbiente, setSelectedAmbiente] = useState(null);
   const [availableAmbientes, setAvailableAmbientes] = useState([]);
   const [environments, setEnvironments] = useState([]);
+  const [reservationMessage, setReservationMessage] = useState(''); // Para mostrar el resultado de la reserva
 
   const allAmbientes = [
     { id: 'computadoras', label: 'Computadoras', icon: '💻' },
@@ -23,32 +25,31 @@ function Ambientes() {
   }, []);
 
   const handleAmbienteClick = async (id) => {
-    // Cargar los ambientes desde el backend
     const data = await fetchAvailableEnvironments(id);
 
-    // Agrupar los ambientes por nombre
     const grouped = data.reduce((acc, env) => {
       const existing = acc.find((item) => item.name === env.name);
       if (existing) {
-        existing.hours.push(env.hour);
+        existing.hours.push({ hour: env.hour, status: env.status });
       } else {
-        acc.push({ ...env, hours: [env.hour] });
+        acc.push({ ...env, hours: [{ hour: env.hour, status: env.status }] });
       }
       return acc;
     }, []);
 
-    setEnvironments(grouped);
+    setEnvironments(grouped.map((item) => ({ ...item, icon: allAmbientes.find((amb) => amb.id === id)?.icon })));
     setSelectedAmbiente(id);
+  };
+
+  const handleReserveClick = async (type, name, hour) => {
+    const result = await reserveEnvironment(type, name, hour);
+    setReservationMessage(result.message); // Mostrar el mensaje
+    setTimeout(() => setReservationMessage(''), 3000); // Limpiar el mensaje después de 3 segundos
   };
 
   const handleBackClick = () => {
     setSelectedAmbiente(null);
     setEnvironments([]);
-  };
-
-  const getIconForType = (type) => {
-    const ambiente = allAmbientes.find((amb) => amb.id === type);
-    return ambiente ? ambiente.icon : '❓'; // Icono por defecto si no coincide
   };
 
   return (
@@ -61,23 +62,28 @@ function Ambientes() {
           <h2>
             {availableAmbientes.find((amb) => amb.id === selectedAmbiente)?.label}
           </h2>
+          {reservationMessage && <p className="reservation-message">{reservationMessage}</p>}
           <div className="ambiente-detail">
             {environments.length > 0 ? (
               environments.map((env, index) => (
                 <div key={index} className="ambiente-card">
-                  <h3>{env.name}</h3>
-                  <div className="icono">{getIconForType(selectedAmbiente)}</div>
-                  <p>Horarios disponibles:</p>
+                  <h3>
+                    {env.icon} {env.name}
+                  </h3>
+                  <p><strong>Horarios disponibles:</strong></p>
                   <div className="time-slot-container">
-                    {env.hours.map((hour, i) => (
-                      <button key={i} className="time-slot">
-                        {hour < 10 ? `0${hour}:00` : `${hour}:00`}
+                    {env.hours.map((slot, i) => (
+                      <button
+                        key={i}
+                        className={`time-slot ${slot.status === 'available' ? 'available' : 'unavailable'}`}
+                        disabled={slot.status === 'unavailable'}
+                        onClick={() => handleReserveClick(selectedAmbiente, env.name, slot.hour)}
+                      >
+                        {slot.hour < 10 ? `0${slot.hour}:00` : `${slot.hour}:00`}
                       </button>
                     ))}
                   </div>
-                  <p>
-                    <strong>Capacidad:</strong> {env.capacity} personas
-                  </p>
+                  <p><strong>Capacidad:</strong> {env.capacity} personas</p>
                 </div>
               ))
             ) : (
