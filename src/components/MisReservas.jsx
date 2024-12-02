@@ -13,11 +13,19 @@ function MisReservas() {
   ];
 
   const statusIcons = {
-    pending: '🟡',
-    expired: '🔴',
-    returned: '✅',
+    pending: '⏳',
+    expired: '❌',
+    returned: '✔️',
     available: '🟢',
-    completed: '✅',
+    completed: '✔️',
+  };
+
+  const statusLabels = {
+    pending: 'Pendiente',
+    expired: 'Expirada',
+    returned: 'Devuelta',
+    available: 'Disponible',
+    completed: 'Completada',
   };
 
   useEffect(() => {
@@ -37,7 +45,7 @@ function MisReservas() {
         data = [...expired, ...pending, ...returned];
       } else if (type === 'ambientes') {
         const pending = await fetchEnvironmentReservations('pending');
-        const other = await fetchEnvironmentReservations('available'); // Maneja otros estados como completado.
+        const other = await fetchEnvironmentReservations('available'); 
         data = [...pending, ...other];
       }
       setReservations(data);
@@ -72,7 +80,7 @@ function MisReservas() {
                 {reservation.author_lastname}
               </p>
               <p>
-                <strong>Estado:</strong> {reservation.status}
+                <strong>Estado:</strong> {statusLabels[reservation.status] || 'Desconocido'}
               </p>
               <p>
                 <strong>Fecha de entrega:</strong> {reservation.max_return_date}
@@ -91,7 +99,7 @@ function MisReservas() {
                 <strong>Capacidad:</strong> {reservation.capacity}
               </p>
               <p>
-                <strong>Estado:</strong> {reservation.status === 'pending' ? 'Pendiente' : 'Completado'}
+                <strong>Estado:</strong> {reservation.status === 'pending' ? 'Pendiente' : 'Completada'}
               </p>
             </>
           )}
