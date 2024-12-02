@@ -1,0 +1,73 @@
+.misreservas-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .misreservas-container h2 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .misreservas-container p {
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .tarjetas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  .tarjeta {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .tarjeta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .icono {
+    font-size: 50px;
+    margin-bottom: 15px;
+  }
+  
+  .label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .detalle-reservas {
+    margin-top: 30px;
+  }
+  
+  .volver-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .volver-btn:hover {
+    background-color: #0056b3;
+  }
+  

@@ -23,8 +23,6 @@ function Ambientes() {
   }, []);
 
   const handleAmbienteClick = async (id) => {
-    const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
-
     // Cargar los ambientes desde el backend
     const data = await fetchAvailableEnvironments(id);
 

@@ -15,10 +15,6 @@ function BuscarLibros() {
   const limit = 6;
 
   const loadBooks = async () => {
-    const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
-    const tenant_id = tenantInfo.tenant_id;
-    const email = localStorage.getItem('email');
-
     const data = await fetchBooks(page, limit, title, authorName, authorLastName);
     setFavoritesLoaded(data.favorites);
     setBooks(data.books);
@@ -26,10 +22,6 @@ function BuscarLibros() {
   };
 
   const loadBooksByIsbn = async () => {
-    const tenantInfo = JSON.parse(localStorage.getItem('tenantInfo') || '{}');
-    const tenant_id = tenantInfo.tenant_id;
-    const email = localStorage.getItem('email');
-
     const data = await fetchBooks(page, limit, '', '', '', isbn);
     setFavoritesLoaded(data.favorites);
     setBooks(data.books);
@@ -53,8 +45,6 @@ function BuscarLibros() {
   };
 
   const handleToggleFavorite = async (isbn) => {
-    const tenant_id = localStorage.getItem('tenant_id');
-    const email = localStorage.getItem('email');
     const success = await toggleFavorite(isbn);
 
     if (success) {
@@ -67,8 +57,6 @@ function BuscarLibros() {
   };
 
   const handleReserveBook = async (isbn) => {
-    const tenant_id = localStorage.getItem('tenant_id');
-    const email = localStorage.getItem('email');
     const result = await reserveBook(isbn);
 
     if (result.success) {
